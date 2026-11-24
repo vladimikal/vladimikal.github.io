@@ -1,294 +1,374 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Independent Research Initiative by Vladislav Druzhka. Open research in origin of life, quantum foundations and computational paleobiology.">
-  <title>Vladislav Druzhka — Independent Research</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Independent Research Initiative by Vladislav Druzhka.">
+<title>DR / 03 — Independent Research Atlas</title>
 
-  <style>
-    :root {
-      --bg: #0b1220;
-      --panel: #121e30;
-      --text: #edf3fa;
-      --muted: #a2b1c4;
-      --accent: #79d4c2;
-      --line: #26364a;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.7;
-    }
-
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .container {
-      width: min(1080px, 90%);
-      margin: auto;
-    }
-
-    header {
-      border-bottom: 1px solid var(--line);
-      padding: 22px 0;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-      font-size: 14px;
-    }
-
-    .hero {
-      padding: 105px 0 85px;
-      max-width: 850px;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.08;
-      margin: 20px 0;
-      letter-spacing: -2px;
-    }
-
-    h2 { font-size: 32px; }
-
-    .lead {
-      color: var(--muted);
-      font-size: 19px;
-      max-width: 700px;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 22px;
-      border: 1px solid var(--accent);
-      border-radius: 6px;
-      font-weight: bold;
-    }
-
-    section { padding: 65px 0; }
-
-    .section-intro {
-      color: var(--muted);
-      max-width: 650px;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .project {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 26px;
-    }
-
-    .number {
-      color: var(--accent);
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .project h3 { font-size: 21px; }
-
-    .project p, .about p {
-      color: var(--muted);
-    }
-
-    .resources {
-      background: var(--panel);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .resource-links {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-      margin-top: 25px;
-    }
-
-    footer {
-      padding: 35px 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-      .hero { padding: 75px 0 55px; }
-      .nav-links { gap: 12px; }
-      h1 { letter-spacing: -1px; }
-    }
-  </style>
+<style>
+:root {
+  --paper:#eeeade;
+  --paper2:#e4dfd1;
+  --ink:#202a29;
+  --muted:#69716a;
+  --green:#648477;
+  --rust:#ad654a;
+  --line:#c9c4b5;
+  --white:#f8f6ef;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,"Times New Roman",serif;
+}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--rust)}
+button,a{transition:.2s}
+.wrap{width:min(1160px,90%);margin:auto}
+header{border-bottom:1px solid var(--line)}
+nav{
+  min-height:76px;display:flex;align-items:center;
+  justify-content:space-between;gap:24px;
+}
+.logo{font-family:Arial,sans-serif;font-weight:800;letter-spacing:2px}
+.logo span{color:var(--rust)}
+.links{display:flex;gap:25px;font:12px Arial,sans-serif;
+text-transform:uppercase;letter-spacing:1px}
+.hero{
+  padding:105px 0 90px;display:grid;
+  grid-template-columns:1.15fr .85fr;gap:50px;
+  align-items:center;min-height:590px;
+}
+.kicker,.number,.small-label{
+  font:11px Arial,sans-serif;text-transform:uppercase;
+  letter-spacing:2px;color:var(--green);
+}
+h1{
+  font-size:clamp(54px,8vw,100px);line-height:.96;
+  font-weight:normal;letter-spacing:-4px;margin:25px 0;
+}
+h1 em{color:var(--green);font-weight:normal}
+.lead{font-size:20px;line-height:1.65;color:var(--muted);max-width:570px}
+.byline{font:12px Arial,sans-serif;letter-spacing:1px;
+text-transform:uppercase;margin-top:35px}
+.hero-art{
+  background:var(--paper2);border:1px solid var(--line);
+  padding:18px;position:relative;
+}
+.hero-art svg{display:block;width:100%;height:auto}
+.art-caption{
+  display:flex;justify-content:space-between;gap:10px;
+  font:10px Arial,sans-serif;text-transform:uppercase;
+  letter-spacing:1px;color:var(--muted);padding-top:12px;
+}
+.section{padding:85px 0;border-top:1px solid var(--line)}
+.section-head{
+  display:flex;justify-content:space-between;
+  align-items:end;gap:30px;margin-bottom:40px;
+}
+h2{font-size:clamp(34px,5vw,55px);font-weight:normal;
+letter-spacing:-1.5px;margin:12px 0}
+.intro{max-width:440px;color:var(--muted);line-height:1.7}
+.projects{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.project{
+  border:1px solid var(--line);padding:22px;
+  background:rgba(255,255,255,.17);
+}
+.project-art{
+  height:190px;background:var(--paper2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:24px;overflow:hidden;
+}
+.project-art svg{width:100%;height:100%}
+.project h3{font-size:25px;font-weight:normal;margin:12px 0}
+.project p{font-size:15px;line-height:1.7;color:var(--muted)}
+.project .tag{
+  font:10px Arial,sans-serif;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--rust)
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:70px;
+}
+.about-text{font-size:19px;line-height:1.8;color:var(--muted)}
+.manifesto{
+  font-size:clamp(27px,4vw,43px);line-height:1.3;
+}
+.manifesto em{color:var(--green)}
+.resources{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:15px;
+}
+.resource{
+  border-top:1px solid var(--line);padding:22px 0;
+}
+.resource a{font-size:21px}
+.resource p{font-size:14px;color:var(--muted)}
+.support{
+  background:var(--ink);color:var(--white);
+  padding:65px;margin-top:20px;
+}
+.support .small-label{color:#a8c0b1}
+.support p{color:#c3c8be;max-width:600px;line-height:1.8}
+.support a{
+  display:inline-block;border:1px solid #a8c0b1;
+  padding:13px 20px;margin-top:15px;
+  font:11px Arial,sans-serif;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--white)
+}
+footer{
+  padding:35px 0;display:flex;justify-content:space-between;
+  gap:20px;color:var(--muted);font:11px Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:1px;
+}
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr;padding:65px 0}
+  .hero-art{max-width:520px}
+  .projects{grid-template-columns:1fr}
+  .project-art{height:220px}
+  .about-grid{grid-template-columns:1fr;gap:15px}
+  .section-head{display:block}
+  .support{padding:35px 25px}
+  .links{gap:12px;font-size:10px}
+  h1{letter-spacing:-2px}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="container">
-    <nav>
-      <div class="brand">V. DRUZHKA / RESEARCH</div>
-      <div class="nav-links">
-        <a href="#research">Research</a>
-        <a href="#about">About</a>
-        <a href="#resources">Resources</a>
-      </div>
-    </nav>
-  </div>
+ <div class="wrap">
+  <nav>
+   <a class="logo" href="#">DR <span>/</span> 03</a>
+   <div class="links">
+    <a href="#research">Research</a>
+    <a href="#about">About</a>
+    <a href="#archive">Archive</a>
+   </div>
+  </nav>
+ </div>
 </header>
 
 <main>
 
-  <section class="container hero">
-    <div class="eyebrow">Independent Research Initiative</div>
+<section class="wrap hero">
+ <div>
+  <div class="kicker">Independent Research Atlas · 2026</div>
+  <h1>Science is<br>the study of<br><em>relations.</em></h1>
+  <p class="lead">
+   An independent research initiative exploring living
+   systems, physical reality and the deep history of life.
+   Three research directions, connected by a commitment
+   to evidence, modelling and open knowledge.
+  </p>
+  <div class="byline">
+   Vladislav Druzhka<br>
+   Independent Researcher · Republic of Moldova
+  </div>
+ </div>
 
-    <h1>Science begins<br>with questions.</h1>
+ <div class="hero-art">
+  <svg viewBox="0 0 480 430" xmlns="http://www.w3.org/2000/svg">
+   <rect width="480" height="430" fill="#e4dfd1"/>
+   <g fill="none" stroke="#648477" stroke-width="1.2">
+    <circle cx="240" cy="205" r="145"/>
+    <circle cx="240" cy="205" r="110" stroke-dasharray="3 7"/>
+    <ellipse cx="240" cy="205" rx="145" ry="55"/>
+    <ellipse cx="240" cy="205" rx="55" ry="145"/>
+    <path d="M95 205H385M240 60V350"/>
+   </g>
+   <g fill="none" stroke="#ad654a" stroke-width="2">
+    <path d="M110 280 Q175 80 240 205 T370 125"/>
+    <circle cx="110" cy="280" r="5" fill="#ad654a"/>
+    <circle cx="240" cy="205" r="6" fill="#ad654a"/>
+    <circle cx="370" cy="125" r="5" fill="#ad654a"/>
+   </g>
+   <g fill="#202a29" font-family="Arial" font-size="10">
+    <text x="28" y="32">FIG. 01 — RELATIONAL SYSTEMS</text>
+    <text x="25" y="405">OBSERVATION / STRUCTURE / CHANGE</text>
+    <text x="350" y="390">DR—03</text>
+   </g>
+  </svg>
+  <div class="art-caption">
+   <span>Research diagram</span><span>01 / 03</span>
+  </div>
+ </div>
+</section>
 
-    <p class="lead">
-      Independent research across the origin of life,
-      foundations of quantum mechanics, and computational
-      paleobiology.
-    </p>
+<section class="section" id="research">
+ <div class="wrap">
+  <div class="section-head">
+   <div>
+    <div class="kicker">Research programme</div>
+    <h2>Three directions</h2>
+   </div>
+   <p class="intro">
+    Different objects of study, different methods.
+    A shared interest in how complex structures emerge,
+    persist and change.
+   </p>
+  </div>
 
+  <div class="projects">
+
+   <article class="project">
+    <div class="project-art">
+     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#648477">
+       <circle cx="150" cy="95" r="65" stroke-width="3"/>
+       <circle cx="150" cy="95" r="54" stroke-width="1" stroke-dasharray="3 4"/>
+       <path d="M90 70Q150 25 210 70M90 120Q150 165 210 120"/>
+       <path d="M110 80l18 12-15 16 22 10M185 70l-13 20 18 10"/>
+      </g>
+      <g fill="#ad654a">
+       <circle cx="125" cy="80" r="5"/><circle cx="180" cy="115" r="4"/>
+       <circle cx="160" cy="55" r="3"/>
+      </g>
+      <g fill="#202a29" font-family="Arial" font-size="9">
+       <text x="12" y="18">MEMBRANE SYSTEM / SCHEMATIC</text>
+      </g>
+     </svg>
+    </div>
+    <div class="tag">01 / Origin of Life</div>
+    <h3>Protocell Dynamics</h3>
     <p>
-      <strong>Vladislav Druzhka</strong><br>
-      Independent Researcher · Republic of Moldova
+     Computational modelling of protocell populations,
+     catalysis, resource availability and the emergence
+     of evolutionary dynamics.
     </p>
+    <p><strong>Focus:</strong> minimal systems, inheritance, population behaviour.</p>
+   </article>
 
-    <a class="button" href="#research">Explore research</a>
-  </section>
-
-  <section class="container" id="research">
-    <div class="eyebrow">Research directions</div>
-    <h2>Three fields. One research initiative.</h2>
-
-    <p class="section-intro">
-      Different scientific questions connected by a common
-      commitment to modelling, evidence and open knowledge.
+   <article class="project">
+    <div class="project-art">
+     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#648477" stroke-width="1.4">
+       <path d="M12 95 Q45 10 78 95 T144 95 T210 95 T276 95"/>
+       <path d="M12 95 Q45 180 78 95 T144 95 T210 95 T276 95" opacity=".55"/>
+       <path d="M12 95H288" stroke-dasharray="3 5"/>
+       <circle cx="150" cy="95" r="5" fill="#ad654a" stroke="#ad654a"/>
+      </g>
+      <g fill="#202a29" font-family="Arial" font-size="9">
+       <text x="12" y="18">INTERFERENCE / SCHEMATIC</text>
+       <text x="225" y="177">x →</text>
+      </g>
+     </svg>
+    </div>
+    <div class="tag">02 / Quantum Foundations</div>
+    <h3>Quantum Measurement</h3>
+    <p>
+     Historical and conceptual research on ensemble
+     interpretations, D. I. Blokhintsev, decoherence
+     and the problem of quantum measurement.
     </p>
+    <p><strong>Focus:</strong> interpretation, physical theory, history of ideas.</p>
+   </article>
 
-    <div class="projects">
-
-      <article class="project">
-        <div class="number">01 / BIOPHYSICS</div>
-        <h3>Origin of Life</h3>
-        <p>
-          Computational modelling of protocell systems,
-          catalytic interactions, resource availability
-          and the emergence of evolutionary dynamics.
-        </p>
-      </article>
-
-      <article class="project">
-        <div class="number">02 / PHYSICS & PHILOSOPHY</div>
-        <h3>Foundations of Quantum Mechanics</h3>
-        <p>
-          Research on ensemble interpretations,
-          D. I. Blokhintsev, quantum decoherence
-          and the problem of measurement.
-        </p>
-      </article>
-
-      <article class="project">
-        <div class="number">03 / PALEOBIOLOGY</div>
-        <h3>PaleoSound</h3>
-        <p>
-          Evidence-based computational approaches
-          to reconstructing sounds of extinct organisms
-          from fossils and scientific literature.
-        </p>
-      </article>
-
+   <article class="project">
+    <div class="project-art">
+     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#648477" stroke-width="1.5">
+       <path d="M65 120 Q85 55 145 72 Q190 78 218 112"/>
+       <path d="M145 72 Q155 40 183 43 Q208 48 218 78"/>
+       <path d="M100 90L62 45M130 76L115 30M162 74L174 27"/>
+       <path d="M218 112L250 145M218 112L265 105"/>
+       <path d="M65 120L40 145"/>
+       <path d="M75 145Q145 168 235 145"/>
+       <path d="M145 72Q150 120 100 145"/>
+      </g>
+      <g fill="#ad654a">
+       <circle cx="145" cy="72" r="4"/>
+       <circle cx="218" cy="112" r="4"/>
+      </g>
+      <g fill="#202a29" font-family="Arial" font-size="9">
+       <text x="12" y="18">MORPHOLOGY / SCHEMATIC</text>
+      </g>
+     </svg>
     </div>
-  </section>
-
-  <section class="resources" id="about">
-    <div class="container about">
-      <div class="eyebrow">About the initiative</div>
-      <h2>Independent work. Open results.</h2>
-
-      <p>
-        This is an independent research initiative based
-        in the Republic of Moldova. Its purpose is to develop
-        research projects, publish findings, share computational
-        tools and make scientific materials openly accessible.
-      </p>
-
-      <p>
-        The initiative is currently developed independently
-        and is not affiliated with a university or research
-        institution.
-      </p>
-    </div>
-  </section>
-
-  <section class="container" id="resources">
-    <div class="eyebrow">Research resources</div>
-    <h2>Explore the work</h2>
-
-    <p class="section-intro">
-      Publications, research materials and open-source development.
+    <div class="tag">03 / Computational Paleobiology</div>
+    <h3>PaleoSound</h3>
+    <p>
+     Evidence-based approaches to reconstructing
+     possible sounds of extinct organisms using
+     fossil anatomy and scientific literature.
     </p>
+    <p><strong>Focus:</strong> fossil evidence, acoustic models, uncertainty.</p>
+   </article>
 
-    <div class="resource-links">
-      <a href="https://doi.org/10.5281/zenodo.21740805"
-         target="_blank" rel="noopener">
-        Zenodo — Research record ↗
-      </a>
+  </div>
+ </div>
+</section>
 
-      <a href="https://github.com/vladimikal/paleosound"
-         target="_blank" rel="noopener">
-        GitHub — PaleoSound ↗
-      </a>
-    </div>
-  </section>
+<section class="section" id="about">
+ <div class="wrap about-grid">
+  <div>
+   <div class="kicker">About the researcher</div>
+   <h2>Independent by position. Scientific by method.</h2>
+  </div>
+  <div>
+   <p class="manifesto">
+    Research should be <em>open to examination</em>,
+    not protected from questions.
+   </p>
+   <p class="about-text">
+    I am an independent researcher based in the Republic
+    of Moldova, developing projects across biophysics,
+    foundations of physics and computational paleobiology.
+    This initiative is independently managed and is not
+    affiliated with a university or research institution.
+   </p>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="archive">
+ <div class="wrap">
+  <div class="kicker">Open research</div>
+  <h2>Archive & resources</h2>
+  <p class="intro">
+   Publications, research records and computational work.
+   New materials will be added as projects develop.
+  </p>
+  <div class="resources">
+   <div class="resource">
+    <div class="small-label">Research record</div>
+    <a href="https://doi.org/10.5281/zenodo.21740805"
+       target="_blank" rel="noopener">Zenodo ↗</a>
+    <p>Research materials and publication record.</p>
+   </div>
+   <div class="resource">
+    <div class="small-label">Open development</div>
+    <a href="https://github.com/vladimikal/paleosound"
+       target="_blank" rel="noopener">GitHub / PaleoSound ↗</a>
+    <p>Code, computational experiments and project development.</p>
+   </div>
+  </div>
+
+  <div class="support">
+   <div class="small-label">Support independent research</div>
+   <h2>Help keep research moving.</h2>
+   <p>
+    Regular support can help sustain computational work,
+    data analysis, research materials and the preparation
+    of open scientific results. Transparent reports
+    and project updates will be published here.
+   </p>
+   <p><em>Support links will be added when payment
+   services are ready.</em></p>
+  </div>
+ </div>
+</section>
 
 </main>
 
-<footer>
-  <div class="container">
-    Independent Research Initiative — Vladislav Druzhka<br>
-    Republic of Moldova · 2026
-  </div>
+<footer class="wrap">
+ <span>DR / 03 — Independent Research Atlas</span>
+ <span>Vladislav Druzhka · 2026</span>
 </footer>
 
 </body>
-  </html>
-  
+        </html>
+        
