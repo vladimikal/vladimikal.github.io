@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Independent Research Initiative by Vladislav Druzhka. Open research in origin of life, quantum foundations and computational paleobiology.">
+  <title>Vladislav Druzhka — Independent Research</title>
+
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #121e30;
+      --text: #edf3fa;
+      --muted: #a2b1c4;
+      --accent: #79d4c2;
+      --line: #26364a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(1080px, 90%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 105px 0 85px;
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
+      margin: 20px 0;
+      letter-spacing: -2px;
+    }
+
+    h2 { font-size: 32px; }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+      max-width: 700px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 22px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    section { padding: 65px 0; }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .project {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 26px;
+    }
+
+    .number {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .project h3 { font-size: 21px; }
+
+    .project p, .about p {
+      color: var(--muted);
+    }
+
+    .resources {
+      background: var(--panel);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .resource-links {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    footer {
+      padding: 35px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 75px 0 55px; }
+      .nav-links { gap: 12px; }
+      h1 { letter-spacing: -1px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="brand">V. DRUZHKA / RESEARCH</div>
+      <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#about">About</a>
+        <a href="#resources">Resources</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container hero">
+    <div class="eyebrow">Independent Research Initiative</div>
+
+    <h1>Science begins<br>with questions.</h1>
+
+    <p class="lead">
+      Independent research across the origin of life,
+      foundations of quantum mechanics, and computational
+      paleobiology.
+    </p>
+
+    <p>
+      <strong>Vladislav Druzhka</strong><br>
+      Independent Researcher · Republic of Moldova
+    </p>
+
+    <a class="button" href="#research">Explore research</a>
+  </section>
+
+  <section class="container" id="research">
+    <div class="eyebrow">Research directions</div>
+    <h2>Three fields. One research initiative.</h2>
+
+    <p class="section-intro">
+      Different scientific questions connected by a common
+      commitment to modelling, evidence and open knowledge.
+    </p>
+
+    <div class="projects">
+
+      <article class="project">
+        <div class="number">01 / BIOPHYSICS</div>
+        <h3>Origin of Life</h3>
+        <p>
+          Computational modelling of protocell systems,
+          catalytic interactions, resource availability
+          and the emergence of evolutionary dynamics.
+        </p>
+      </article>
+
+      <article class="project">
+        <div class="number">02 / PHYSICS & PHILOSOPHY</div>
+        <h3>Foundations of Quantum Mechanics</h3>
+        <p>
+          Research on ensemble interpretations,
+          D. I. Blokhintsev, quantum decoherence
+          and the problem of measurement.
+        </p>
+      </article>
+
+      <article class="project">
+        <div class="number">03 / PALEOBIOLOGY</div>
+        <h3>PaleoSound</h3>
+        <p>
+          Evidence-based computational approaches
+          to reconstructing sounds of extinct organisms
+          from fossils and scientific literature.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="resources" id="about">
+    <div class="container about">
+      <div class="eyebrow">About the initiative</div>
+      <h2>Independent work. Open results.</h2>
+
+      <p>
+        This is an independent research initiative based
+        in the Republic of Moldova. Its purpose is to develop
+        research projects, publish findings, share computational
+        tools and make scientific materials openly accessible.
+      </p>
+
+      <p>
+        The initiative is currently developed independently
+        and is not affiliated with a university or research
+        institution.
+      </p>
+    </div>
+  </section>
+
+  <section class="container" id="resources">
+    <div class="eyebrow">Research resources</div>
+    <h2>Explore the work</h2>
+
+    <p class="section-intro">
+      Publications, research materials and open-source development.
+    </p>
+
+    <div class="resource-links">
+      <a href="https://doi.org/10.5281/zenodo.21740805"
+         target="_blank" rel="noopener">
+        Zenodo — Research record ↗
+      </a>
+
+      <a href="https://github.com/vladimikal/paleosound"
+         target="_blank" rel="noopener">
+        GitHub — PaleoSound ↗
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    Independent Research Initiative — Vladislav Druzhka<br>
+    Republic of Moldova · 2026
+  </div>
+</footer>
+
+</body>
+  </html>
+  
