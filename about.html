@@ -1,102 +1,470 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="The personal path, motivations and scientific interests of Vladislav Druzhka, an independent researcher.">
-  <title>About — Vladislav Druzhka</title>
+  <meta name="theme-color" content="#eeeade">
+  <title>About — Vladislav Druzhka | DR / 03</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #eeeade;
+      --paper-deep: #e4dfd1;
+      --ink: #202a29;
+      --muted: #69716a;
+      --green: #648477;
+      --rust: #ad654a;
+      --line: #c9c4b5;
+      --white: #f8f6ef;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+      --page: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-underline-offset: 4px; }
+    a:hover { color: var(--rust); }
+    a:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; }
+    .wrap { width: min(var(--page), calc(100% - 56px)); margin-inline: auto; }
+
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(238, 234, 222, .94);
+    }
+    .header-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .09em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--ink);
+      font-family: var(--serif);
+      font-size: 15px;
+      letter-spacing: -.06em;
+    }
+    .brand-name { line-height: 1.25; }
+    .brand-name span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 3vw, 38px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    nav a {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    nav a[aria-current="page"] { color: var(--ink); border-bottom: 1px solid var(--rust); padding-bottom: 7px; }
+
+    .eyebrow, .section-index, .meta-label {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .17em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+    .hero { padding: clamp(62px, 9vw, 112px) 0 72px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(250px, .75fr);
+      gap: clamp(36px, 7vw, 96px);
+      align-items: end;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 760px;
+      margin: 18px 0 24px;
+      font-family: var(--serif);
+      font-size: clamp(48px, 7.4vw, 88px);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .99;
+    }
+    .hero-lede {
+      max-width: 670px;
+      margin-bottom: 0;
+      color: #46514c;
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.1vw, 24px);
+      line-height: 1.5;
+    }
+    .identity {
+      padding: 24px 0 5px 24px;
+      border-left: 2px solid var(--rust);
+    }
+    .identity-name {
+      margin: 0 0 6px;
+      font-family: var(--serif);
+      font-size: 25px;
+      line-height: 1.2;
+    }
+    .identity-role { margin: 0; color: var(--muted); font-size: 13px; }
+    .identity-note {
+      margin: 22px 0 0;
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .1em;
+      line-height: 1.65;
+      text-transform: uppercase;
+    }
+
+    .statement-band {
+      padding: 34px 0 38px;
+      background: var(--ink);
+      color: var(--white);
+    }
+    .statement-band .wrap {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 38px;
+      align-items: start;
+    }
+    .statement-band .eyebrow { color: #a9b8ae; padding-top: 9px; }
+    blockquote {
+      max-width: 850px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.2vw, 38px);
+      letter-spacing: -.025em;
+      line-height: 1.32;
+    }
+    blockquote span { color: #c98a6e; }
+
+    .content { padding: 42px 0 104px; }
+    .story-section {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: clamp(28px, 6vw, 78px);
+      padding: 48px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-aside { padding-top: 8px; }
+    .section-index { display: block; margin-bottom: 13px; color: var(--rust); }
+    .section-aside p {
+      max-width: 150px;
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+    .story-copy { max-width: 760px; }
+    h2 {
+      margin: 0 0 20px;
+      font-family: var(--serif);
+      font-size: clamp(30px, 3.6vw, 43px);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.12;
+    }
+    .story-copy p { margin-bottom: 16px; color: #46514c; }
+    .story-copy p:last-child { margin-bottom: 0; }
+    .story-copy strong { color: var(--ink); font-weight: 700; }
+
+    .research-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin: 28px 0 0;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+    .research-link {
+      min-height: 155px;
+      padding: 22px 20px;
+      background: var(--paper-deep);
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+    .research-link:hover { background: var(--white); }
+    .research-link .number { color: var(--rust); font-size: 10px; letter-spacing: .14em; }
+    .research-link h3 {
+      margin: 13px 0 7px;
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    .research-link p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+      margin-top: 54px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      background: rgba(248, 246, 239, .48);
+    }
+    .principle h2 { margin-bottom: 12px; font-size: 32px; }
+    .principle p { margin: 0; color: #46514c; }
+    .principle-quote {
+      align-self: center;
+      padding-left: 24px;
+      border-left: 2px solid var(--green);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.35;
+    }
+
+    .closing {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      padding: 56px 0 0;
+    }
+    .closing p { max-width: 650px; margin: 0; color: var(--muted); font-size: 13px; }
+    .text-link {
+      display: inline-block;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--rust);
+      padding-bottom: 7px;
+      white-space: nowrap;
+    }
+    .site-footer { border-top: 1px solid var(--line); padding: 22px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 11px; }
+    .footer-inner p { margin: 0; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, var(--page)); }
+      .header-inner { min-height: 72px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 13px; padding: 15px 0; }
+      .brand-mark { width: 36px; height: 36px; }
+      nav ul { gap: 20px; flex-wrap: wrap; }
+      nav a { font-size: 10px; }
+      .hero { padding: 58px 0 50px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+      h1 { max-width: 560px; }
+      .identity { max-width: 360px; }
+      .statement-band .wrap { grid-template-columns: 1fr; gap: 13px; }
+      .story-section { grid-template-columns: 1fr; gap: 15px; padding: 37px 0; }
+      .section-aside p { max-width: none; }
+      .research-links { grid-template-columns: 1fr; }
+      .research-link { min-height: auto; }
+      .principle { grid-template-columns: 1fr; gap: 25px; padding: 25px; }
+      .closing { align-items: flex-start; flex-direction: column; }
+      .footer-inner { flex-direction: column; gap: 6px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .research-link { transition: none; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <p><a href="index.html">DR / 03 — Independent Research Atlas</a></p>
-    <nav aria-label="Main navigation">
-      <ul>
-        <li><a href="index.html#research">Research</a></li>
-        <li><a href="about.html" aria-current="page">About</a></li>
-        <li><a href="index.html#archive">Archive</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="DR / 03 — Independent Research Atlas, home">
+        <span class="brand-mark">DR<br>/ 03</span>
+        <span class="brand-name">Independent Research Atlas<span>Research · Reflection · Open Knowledge</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html#research">Research</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="index.html#archive">Archive</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <article>
-      <header>
-        <p>ABOUT THE RESEARCHER</p>
-        <h1>A Personal Path into Science</h1>
-        <p><strong>Vladislav Druzhka</strong><br>
-        Independent Researcher · Republic of Moldova</p>
-        <blockquote>
-          I see science as a way of understanding nature — and, through that understanding, finding ways to contribute to humanity.
-        </blockquote>
-      </header>
+    <section class="hero wrap" aria-labelledby="page-title">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">About the researcher · Personal record 01</p>
+          <h1 id="page-title">A personal path into science.</h1>
+          <p class="hero-lede">A lifelong curiosity about life, physical reality and the deep history of nature — and a continuing belief that scientific knowledge should be open, shared and useful to society.</p>
+        </div>
+        <aside class="identity" aria-label="Researcher information">
+          <p class="meta-label">Independent researcher</p>
+          <p class="identity-name">Vladislav Druzhka</p>
+          <p class="identity-role">Self-taught researcher<br>Republic of Moldova</p>
+          <p class="identity-note">Biology · Quantum foundations<br>Computational paleobiology<br>History and philosophy of science</p>
+        </aside>
+      </div>
+    </section>
 
-      <section>
-        <h2>A path shaped by curiosity</h2>
-        <p>
-          Since childhood, I have dreamed of using knowledge and scientific understanding to help people and contribute something meaningful to society. I have long believed that science should not exist only within laboratories, universities or academic publications. It should also be a shared human endeavour: open to discussion, accessible to the public and capable of improving our understanding of the world.
-        </p>
-        <p>
-          My path into science has not been conventional. Due to illness, I was unable to pursue university education in the way I had once hoped. Yet I never abandoned my ambition to engage in scientific research. I continued learning independently, studying scientific literature, exploring the history and philosophy of science, developing research ideas and gradually building projects across several fields.
-        </p>
-      </section>
+    <section class="statement-band" aria-label="Personal principle">
+      <div class="wrap">
+        <p class="eyebrow">A guiding idea</p>
+        <blockquote>“I see science as a way of understanding nature — and, through that understanding, finding ways to <span>contribute to humanity.</span>”</blockquote>
+      </div>
+    </section>
 
-      <section>
-        <h2>Biology and the questions of life</h2>
-        <p>
-          Biology was among my earliest passions. As a child, I was fascinated by living organisms and the complexity of life. I hoped that scientific knowledge might one day help people in the fight against serious diseases, including cancer. That early aspiration grew into a broader curiosity about the fundamental mechanisms of living systems: how life emerges, how it develops and what makes biological organisation possible.
-        </p>
-      </section>
+    <div class="wrap content">
+      <article>
+        <section class="story-section" aria-labelledby="path-heading">
+          <aside class="section-aside">
+            <span class="section-index">01 / Beginnings</span>
+            <p>Curiosity before a career path</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="path-heading">A path shaped by curiosity</h2>
+            <p>Since childhood, I have dreamed of using knowledge and scientific understanding to help people and contribute something meaningful to society. I have long believed that science should not exist only within laboratories, universities or academic publications. It should also be a shared human endeavour: open to discussion, accessible to the public and capable of improving our understanding of the world.</p>
+            <p>My path into science has not been conventional. Due to illness, I was unable to pursue university education in the way I had once hoped. Yet I never abandoned my ambition to engage in scientific research. I continued learning independently, studying scientific literature, exploring the history and philosophy of science, developing research ideas and gradually building projects across several fields.</p>
+          </div>
+        </section>
 
-      <section>
-        <h2>Quantum physics and its foundations</h2>
-        <p>
-          Quantum physics fascinated me no less. Its conceptual problems and unresolved questions led me to the foundations of quantum mechanics and the history of physics. I became particularly interested in the diverse traditions of Soviet physics, including its materialist philosophical perspectives, while also studying Western approaches to quantum theory.
-        </p>
-        <p>
-          Among the interpretations I encountered, Dmitry I. Blokhintsev's ensemble interpretation became especially interesting to me. I find its approach close to my own materialist outlook on quantum mechanics, and I continue to examine its relation to the problems of quantum measurement and decoherence.
-        </p>
-      </section>
+        <section class="story-section" aria-labelledby="biology-heading">
+          <aside class="section-aside">
+            <span class="section-index">02 / Biology</span>
+            <p>Life, health and living systems</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="biology-heading">Biology and the questions of life</h2>
+            <p>Biology was among my earliest passions. As a child, I was fascinated by living organisms and the complexity of life. I hoped that scientific knowledge might one day help people in the fight against serious diseases, including cancer. That early aspiration grew into a broader curiosity about the fundamental mechanisms of living systems: how life emerges, how it develops and what makes biological organisation possible.</p>
+          </div>
+        </section>
 
-      <section>
-        <h2>PaleoSound: imagining the acoustic past</h2>
-        <p>
-          PaleoSound began with a question that grew out of curiosity: could we learn something about the sounds of organisms that disappeared millions of years ago? This question developed into an independent project exploring evidence-based ways to investigate the possible acoustic capabilities and sound production of extinct organisms, using fossil anatomy and scientific literature.
-        </p>
-        <p>
-          Studying ancient life on Earth can also broaden the way we think about life beyond our planet. By investigating how living systems have appeared and changed in different environments on Earth, we may develop better questions about what life could have been like in other planetary environments — in the past or today.
-        </p>
-      </section>
+        <section class="story-section" aria-labelledby="quantum-heading">
+          <aside class="section-aside">
+            <span class="section-index">03 / Physics</span>
+            <p>Interpretation, measurement and material reality</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="quantum-heading">Quantum physics and its foundations</h2>
+            <p>Quantum physics fascinated me no less. Its conceptual problems and unresolved questions led me to the foundations of quantum mechanics and the history of physics. I became particularly interested in the diverse traditions of Soviet physics, including its materialist philosophical perspectives, while also studying Western approaches to quantum theory.</p>
+            <p>Among the interpretations I encountered, Dmitry I. Blokhintsev's ensemble interpretation became especially interesting to me. I find its approach close to my own materialist outlook on quantum mechanics, and I continue to examine its relation to the problems of quantum measurement and decoherence.</p>
+          </div>
+        </section>
 
-      <section>
-        <h2>The origin of life</h2>
-        <p>
-          The origin of life brings together many of my deepest scientific interests. It is a fundamental challenge to our understanding of nature: how can living systems emerge from non-living matter? What physical and chemical mechanisms could make this transition possible? What minimal organisation is required for a system to persist, reproduce and evolve? These questions also invite us to consider how life might arise and what forms it could take on other planets.
-        </p>
-      </section>
+        <section class="story-section" aria-labelledby="paleo-heading">
+          <aside class="section-aside">
+            <span class="section-index">04 / Deep time</span>
+            <p>Listening to the possible acoustic past</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="paleo-heading">PaleoSound: imagining the acoustic past</h2>
+            <p>PaleoSound began with a question that grew out of curiosity: could we learn something about the sounds of organisms that disappeared millions of years ago? This question developed into an independent project exploring evidence-based ways to investigate the possible acoustic capabilities and sound production of extinct organisms, using fossil anatomy and scientific literature.</p>
+            <p>Studying ancient life on Earth can also broaden the way we think about life beyond our planet. By investigating how living systems have appeared and changed in different environments on Earth, we may develop better questions about what life could have been like in other planetary environments — in the past or today.</p>
+          </div>
+        </section>
 
-      <section>
-        <h2>An open approach to science</h2>
-        <p>
-          Across these projects, I share a commitment to a more open culture of science: open discussion, accessible research materials, transparent data, reproducible computational experiments and public scientific education. I believe scientific knowledge should be discussed, examined, challenged and shared. Public engagement with science and accessible science education should encourage curiosity and critical thinking, rather than make scientific knowledge feel distant from everyday society.
-        </p>
-      </section>
+        <section class="story-section" aria-labelledby="origin-heading">
+          <aside class="section-aside">
+            <span class="section-index">05 / Origins</span>
+            <p>How non-living matter becomes living systems</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="origin-heading">The origin of life</h2>
+            <p>The origin of life brings together many of my deepest scientific interests. It is a fundamental challenge to our understanding of nature: how can living systems emerge from non-living matter? What physical and chemical mechanisms could make this transition possible? What minimal organisation is required for a system to persist, reproduce and evolve? These questions also invite us to consider how life might arise and what forms it could take on other planets.</p>
+          </div>
+        </section>
 
-      <section>
-        <h2>Independent research</h2>
-        <p>
-          Today, I work as an independent, self-taught researcher based in the Republic of Moldova, developing projects at the intersection of biology, physics, computational modelling, and the history and philosophy of science. This work is independently managed and is not affiliated with a university or research institution.
-        </p>
-        <p>
-          My institutional path may be unconventional, but my commitment to scientific inquiry is serious. I aim to make the work as transparent as possible and to share its methods, materials and results so that others can examine, question and build upon them.
-        </p>
-        <p><a href="index.html#research">Explore the research directions</a> · <a href="index.html#archive">Visit the research archive</a></p>
-      </section>
-    </article>
+        <section class="story-section" aria-labelledby="open-heading">
+          <aside class="section-aside">
+            <span class="section-index">06 / Open science</span>
+            <p>Knowledge as a shared human endeavour</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="open-heading">An open approach to science</h2>
+            <p>Across these projects, I share a commitment to a more open culture of science: open discussion, accessible research materials, transparent data, reproducible computational experiments and public scientific education. I believe scientific knowledge should be discussed, examined, challenged and shared. Public engagement with science and accessible science education should encourage curiosity and critical thinking, rather than make scientific knowledge feel distant from everyday society.</p>
+          </div>
+        </section>
+
+        <section class="story-section" aria-labelledby="independent-heading">
+          <aside class="section-aside">
+            <span class="section-index">07 / Today</span>
+            <p>Independent by position. Scientific by method.</p>
+          </aside>
+          <div class="story-copy">
+            <h2 id="independent-heading">Independent research</h2>
+            <p>Today, I work as an independent, self-taught researcher based in the Republic of Moldova, developing projects at the intersection of biology, physics, computational modelling, and the history and philosophy of science. This work is independently managed and is not affiliated with a university or research institution.</p>
+            <p>My institutional path may be unconventional, but my commitment to scientific inquiry is serious. I aim to make the work as transparent as possible and to share its methods, materials and results so that others can examine, question and build upon them.</p>
+          </div>
+        </section>
+
+        <section class="principle" aria-labelledby="principle-heading">
+          <div>
+            <p class="eyebrow">Research directions</p>
+            <h2 id="principle-heading">Different questions.<br>A shared curiosity.</h2>
+            <p>My projects approach nature from different angles. They are connected by an interest in how complex structures emerge, persist, change and become knowable.</p>
+          </div>
+          <div class="principle-quote">“Science should be open to examination, not protected from questions.”</div>
+        </section>
+
+        <div class="research-links" aria-label="Explore research directions">
+          <a class="research-link" href="research/origin-of-life.html">
+            <span class="number">01 / ORIGIN OF LIFE</span>
+            <h3>Protocell Dynamics</h3>
+            <p>Computational modelling of primitive cellular systems</p>
+          </a>
+          <a class="research-link" href="index.html#research">
+            <span class="number">02 / QUANTUM FOUNDATIONS</span>
+            <h3>Quantum Measurement</h3>
+            <p>Ensemble interpretation, Blokhintsev and decoherence</p>
+          </a>
+          <a class="research-link" href="index.html#research">
+            <span class="number">03 / COMPUTATIONAL PALEOBIOLOGY</span>
+            <h3>PaleoSound</h3>
+            <p>Scientific approaches to the acoustic past</p>
+          </a>
+        </div>
+
+        <div class="closing">
+          <p>This is an ongoing path of independent study and research. The projects, methods and materials will continue to develop, and their progress will be documented openly.</p>
+          <a class="text-link" href="index.html#research">Explore the research programme →</a>
+        </div>
+      </article>
+    </div>
   </main>
 
-  <footer>
-    <p>DR / 03 — Independent Research Atlas</p>
-    <p>Vladislav Druzhka · Republic of Moldova · 2026</p>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>DR / 03 — Independent Research Atlas</p>
+      <p>Vladislav Druzhka · Republic of Moldova · 2026</p>
+    </div>
   </footer>
 </body>
 </html>
+
