@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Protocell Dynamics: computational model of primitive compartment populations.">
+<title>Protocell Dynamics — DR / 03</title>
+<style>
+:root{--paper:#eeeade;--ink:#202a29;--muted:#69716a;--green:#648477;--rust:#ad654a;--line:#c9c4b5;--paper2:#e4dfd1}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1c2322;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--rust:#e0997c;--line:#3a4544;--paper2:#243030}}
+:root[data-theme="dark"]{--paper:#1c2322;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--rust:#e0997c;--line:#3a4544;--paper2:#243030}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}
+main{width:min(820px,90%);margin:0 auto;padding:60px 0 80px}
+a{color:var(--green)}
+.small{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+.kicker{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
+h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margin:14px 0}
+h2{font-weight:normal;font-size:26px;margin:44px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+.lead{font-size:19px;color:var(--muted)}
+p,li{font-size:17px}
+li{margin-bottom:8px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:18px 0;font:14px Arial,sans-serif}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--green);font-weight:normal;text-transform:uppercase;font-size:11px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<main>
+<p class="small">DR / 03 — Independent Research Initiative</p>
+<p class="small">Home Research overview</p>
+<p class="kicker">RESEARCH AREA 01 · ORIGIN OF LIFE</p>
+<h1>Protocell Dynamics</h1>
+<p class="lead">Computational modelling of primitive cellular systems</p>
+<p>This project explores how resource availability, catalytic activity, internal reaction networks, inheritance and division can interact in a simplified population of protocell-like compartments.</p>
+<h2>Research question</h2>
+<p>Under what model conditions can simple compartmentalised systems maintain internal reaction activity, grow and divide while competing for a finite shared resource? How do externally supplied catalysis and the inheritance of kinetic properties affect population-level dynamics?</p>
+<p>The present model is a computational framework for exploring these relationships. It does not, by itself, demonstrate a historical pathway for the origin of life.</p>
+<h2>Model overview</h2>
+<p>The simulation represents a population of discrete compartments. Each compartment has internal molecular counts and a set of kinetic parameters. Reactions are simulated stochastically over a unit time interval for each generation. Cells interact indirectly through a finite shared pool of resource A.</p>
+<p>The stochastic reaction step uses the Gillespie direct-method structure: reaction propensities are calculated, a waiting time is sampled, and one reaction event is selected according to its propensity. The population is then updated through growth and division.</p>
+<p>A run begins with one founder compartment. The supplied experiment drivers run simulations for 80 generations, with 30 independent replicate seeds per condition. Population size is capped at 2,000 compartments.</p>
+<h2>Internal reaction network</h2>
+<p>The current implementation contains the following modelled processes.</p>
+<table>
+<tr><th>Reaction and process rules implemented in sim.hpp Process</th><th>Model rule</th><th>Interpretation in the simulation</th></tr>
+<tr><td>Resource uptake</td><td>rate = influx × V</td><td>Resource A enters from the shared pool; each uptake event removes one unit from the pool.</td></tr>
+<tr><td>Catalytic conversion by E</td><td>A + E → B + E; rate = k1 × A × E / V</td><td>Enzyme-like component E catalyses conversion of A into B.</td></tr>
+<tr><td>Transcription</td><td>G → G + M; rate = kt × G</td><td>Genome-copy count G drives production of messenger RNA M.</td></tr>
+<tr><td>Translation</td><td>M + R → M + R + E; rate = kp × M × R / V</td><td>Translation produces E, consumes one ATP unit, and depends on M and ribosome count R.</td></tr>
+<tr><td>Degradation</td><td>E → ∅; M → ∅; A → ∅</td><td>Separate first-order degradation processes are defined for E, M and A.</td></tr>
+<tr><td>Energy conversion</td><td>A → ATP; B → ATP</td><td>The model includes a glycolysis-like ATP source from A and a respiration-like ATP source from B, modulated by the mitochondrial count.</td></tr>
+<tr><td>Vesicle packaging</td><td>B ⇄ VB</td><td>Component B can be packaged into and released from a modelled vesicle pool VB.</td></tr>
+<tr><td>Externally supplied catalyst C</td><td>A + C → B + C</td><td>When enabled, C enters from the environment, can decay, and catalyses conversion of A into B without being consumed by that reaction.</td></tr>
+<tr><td>Boundary export</td><td>B → outside</td><td>In permeability-enabled conditions, B can leave the compartment at a rate determined by its inherited permeability parameter.</td></tr>
+</table>
+<h2>Growth, division and inheritance</h2>
+<p>Compartment volume is an abstract model variable calculated as:</p>
+<p>V = V0 + gamma × (B + E + M + VB + R + C)</p>
+<p>A compartment divides when its calculated volume reaches Vmax. Before partitioning, the genome-copy count is raised to at least two. Molecular counts are distributed between the two daughters using binomial partitioning rules, with minimum copy-number constraints for selected components.</p>
+<p>The kinetic parameters k1, kp and kd are inherited with log-normal multiplicative variation at division. When the external catalyst is enabled, its catalytic parameter k1C is also inherited with multiplicative variation. In permeability-enabled simulations, the boundary permeability parameter can vary additively, subject to a lower bound of zero.</p>
+<h2>Shared resource and changing environment</h2>
+<p>All compartments draw resource A from one finite pool. Resource enters the pool at a generation-dependent rate. The environment alternates between a resource-rich and a resource-poor phase, with each phase lasting 25 generations in the default parameter set.</p>
+<p>The pool has a maximum capacity of 400 units and starts at half of that capacity. The default inflow is 8 units per generation, modified by an environmental amplitude of 0.7. Uptake by one compartment therefore changes the amount available to the others.</p>
+<h2>Selected default parameters</h2>
+<table>
+<tr><th>Default values defined in SimParams and the founder initialisation Parameter</th><th>Default</th><th>Role</th></tr>
+<tr><td>V0</td><td>1.0</td><td>Baseline volume</td></tr>
+<tr><td>Vmax</td><td>1.4</td><td>Division threshold</td></tr>
+<tr><td>influx</td><td>0.5</td><td>Resource uptake rate coefficient</td></tr>
+<tr><td>kdA</td><td>0.05</td><td>Degradation rate coefficient for A</td></tr>
+<tr><td>kt</td><td>0.50</td><td>Transcription rate coefficient</td></tr>
+<tr><td>kmd</td><td>0.10</td><td>Messenger RNA degradation rate coefficient</td></tr>
+<tr><td>kp</td><td>0.05</td><td>Founder translation parameter</td></tr>
+<tr><td>k1</td><td>1.0</td><td>Founder catalytic conversion parameter for E</td></tr>
+<tr><td>sigma</td><td>0.05</td><td>Log-normal variation scale for inherited kinetic parameters</td></tr>
+<tr><td>kC</td><td>0.05</td><td>External C influx coefficient when C is enabled</td></tr>
+<tr><td>k1C0</td><td>1.0</td><td>Founder catalytic parameter for C</td></tr>
+<tr><td>poolIn</td><td>8.0</td><td>Baseline resource inflow per generation</td></tr>
+<tr><td>amp</td><td>0.7</td><td>Amplitude of environmental resource oscillation</td></tr>
+<tr><td>period</td><td>25</td><td>Generations per environmental phase</td></tr>
+<tr><td>cap</td><td>2,000</td><td>Maximum population size</td></tr>
+</table>
+<h2>Computational experiment design</h2>
+<p>The supplied driver run_all.cpp defines a set of comparison conditions and a parameter grid. Each condition is run for 30 replicate seeds over 80 generations.</p>
+<table>
+<tr><th>Conditions configured in run_all.cpp Condition</th><th>Configuration</th><th>Intended comparison</th></tr>
+<tr><td>base</td><td>No external catalyst C; no boundary export</td><td>Reference condition</td></tr>
+<tr><td>cat</td><td>External catalyst C enabled</td><td>Effect of adding the C-mediated conversion pathway</td></tr>
+<tr><td>cat_noTrans</td><td>C enabled; translation disabled</td><td>Behaviour with C present but E production switched off</td></tr>
+<tr><td>cat_perm</td><td>C enabled; export of B through the boundary enabled</td><td>Combined C and boundary-export condition</td></tr>
+<tr><td>base_perm</td><td>No C; export of B through the boundary enabled</td><td>Boundary-export condition without C</td></tr>
+<tr><td>grid</td><td>C enabled; kC = 0.01, 0.05 or 0.10; k1C0 = 0.5, 1.0 or 2.0</td><td>Parameter-grid exploration of C influx and catalytic strength</td></tr>
+</table>
+<p>A second driver, run30.cpp, defines a separate four-condition comparison that also includes base_noTrans. It writes a different CSV column layout from run_all.cpp; the supplied analysis script is structured for the latter layout.</p>
+<h2>Computational results</h2>
+<p>The analysed dataset all.csv contains 34,020 observations in the columns cond, kC, k1C0, rep, gen and n. It covers 14 condition/parameter series: five named comparison conditions and nine parameter-grid settings. Each series contains 30 replicate runs, recorded at generations 0 through 80 (81 observations per run).</p>
+<p>The dataset contains 420 condition-replicate trajectories. All trajectories have a complete generation range, with no duplicate condition/parameter/replicate/generation keys. The largest observed population was 20 compartments, so the model's 2,000-compartment cap was not reached in these runs. The grid point kC = 0.05, k1C0 = 1.0 reproduces the cat condition exactly, including all 30 trajectories; it is the same parameter setting and seed sequence, not an additional independent confirmation.</p>
+<h2>Mean population size across selected generations</h2>
+<p>Values below are the arithmetic mean of population size n across the 30 replicate runs in each condition.</p>
+<table>
+<tr><th>Mean number of compartments at selected generations Condition</th><th>G0</th><th>G20</th><th>G40</th><th>G60</th><th>G80</th></tr>
+<tr><td>base</td><td>1.00</td><td>2.33</td><td>3.73</td><td>5.07</td><td>6.37</td></tr>
+<tr><td>cat</td><td>1.00</td><td>2.40</td><td>4.20</td><td>5.93</td><td>8.80</td></tr>
+<tr><td>cat_noTrans</td><td>1.00</td><td>1.00</td><td>1.10</td><td>1.13</td><td>1.20</td></tr>
+<tr><td>cat_perm</td><td>1.00</td><td>2.40</td><td>3.77</td><td>5.47</td><td>7.60</td></tr>
+<tr><td>base_perm</td><td>1.00</td><td>2.33</td><td>3.37</td><td>4.40</td><td>6.00</td></tr>
+</table>
+<h2>Endpoint population size at generation 80</h2>
+<p>Each row summarises 30 replicate runs. SD is the sample standard deviation; IQR is the interval from the 25th to the 75th percentile.</p>
+<table>
+<tr><th>Population size at generation 80 Condition</th><th>Mean ± SD</th><th>Median</th><th>IQR</th><th>Range</th></tr>
+<tr><td>base</td><td>6.37 ± 1.96</td><td>6</td><td>5–7.75</td><td>3–11</td></tr>
+<tr><td>cat</td><td>8.80 ± 4.05</td><td>9</td><td>5.25–10</td><td>3–20</td></tr>
+<tr><td>cat_noTrans</td><td>1.20 ± 0.41</td><td>1</td><td>1–1</td><td>1–2</td></tr>
+<tr><td>cat_perm</td><td>7.60 ± 2.42</td><td>7</td><td>6–9</td><td>4–14</td></tr>
+<tr><td>base_perm</td><td>6.00 ± 1.74</td><td>6</td><td>5–7</td><td>2–10</td></tr>
+</table>
+<h2>Parameter-grid experiment</h2>
+<p>The grid varies the external catalyst influx coefficient kC and the founder catalytic parameter k1C0. All nine settings enable C, retain translation and disable boundary export. Values are population size at generation 80.</p>
+<table>
+<tr><th>Endpoint population size across the 3 × 3 parameter grid (30 replicates per cell) kC</th><th>k1C0</th><th>Mean</th><th>Median</th><th>Range</th></tr>
+<tr><td>0.01</td><td>0.5</td><td>6.97</td><td>6.5</td><td>4–10</td></tr>
+<tr><td>0.01</td><td>1.0</td><td>6.90</td><td>6</td><td>4–12</td></tr>
+<tr><td>0.01</td><td>2.0</td><td>6.40</td><td>6</td><td>3–11</td></tr>
+<tr><td>0.05</td><td>0.5</td><td>7.57</td><td>7</td><td>3–14</td></tr>
+<tr><td>0.05</td><td>1.0</td><td>8.80</td><td>9</td><td>3–20</td></tr>
+<tr><td>0.05</td><td>2.0</td><td>7.77</td><td>7</td><td>3–15</td></tr>
+<tr><td>0.10</td><td>0.5</td><td>9.13</td><td>9</td><td>3–17</td></tr>
+<tr><td>0.10</td><td>1.0</td><td>11.33</td><td>12</td><td>3–20</td></tr>
+<tr><td>0.10</td><td>2.0</td><td>10.97</td><td>11</td><td>5–20</td></tr>
+</table>
+<h2>Preliminary interpretation</h2>
+<ul>
+<li>In the reference setting, the mean endpoint population was 6.37 compartments (median 6). With external catalysis enabled (cat), it was 8.80 (median 9). This is a descriptive difference under the tested parameter set, not evidence that external catalysis will increase population growth in every model configuration.</li>
+<li>In cat_noTrans, where translation is disabled while C remains enabled, the mean endpoint population was 1.20 and the median was 1. In 24 of the 30 replicates, the population remained at one compartment at generation 80.</li>
+<li>With boundary export enabled, the endpoint mean was 7.60 in cat_perm compared with 8.80 in cat, and 6.00 in base_perm compared with 6.37 in base. These comparisons are descriptive and should not be treated as general estimates of a membrane-permeability effect.</li>
+<li>Across the tested grid, increasing kC from 0.01 to 0.10 was accompanied by a higher mean endpoint population at each of the three k1C0 values. The largest mean in this grid was 11.33 (median 12) at kC = 0.10 and k1C0 = 1.0. The response to k1C0 was not monotonic across all grid rows.</li>
+</ul>
+<p>These are descriptive outcomes of this particular stochastic implementation. The recorded CSV contains population size only; it does not include replicate-level molecular counts, resource-pool trajectories, or catalytic activity measurements. Therefore, the present dataset cannot identify which internal process caused a population-level difference.</p>
+<p>The included analyze.py uses bootstrap resampling for differences in medians and an approximate Mann–Whitney calculation. Its p-value calculation does not correct the variance for ties and does not adjust for multiple comparisons. Those p-values are not reported as confirmatory statistical evidence here. Inferential analysis should be revised before making statistical significance claims.</p>
+<h2>Scope and limitations</h2>
+<ul>
+<li>This is a coarse-grained stochastic model. Its rules and numerical values are modelling assumptions, not measured biochemical constants.</li>
+<li>The current code does not model the formation or physical mechanics of a lipid membrane. The optional boundary feature represents export of B through a simplified boundary parameter.</li>
+<li>The genome is represented by a copy number, not by a nucleotide sequence. Heritable kinetic parameters are abstract traits; the model does not simulate genes or a real genotype-to-phenotype mapping.</li>
+<li>Non-dividing compartments remain in the population. There is no explicit cell-death process; when the population exceeds its cap, excess compartments are removed by random truncation.</li>
+<li>The volume expression is a proxy defined by selected internal counts. It is not a geometrical reconstruction of a cell or a physical equation of state.</li>
+<li>Some partitioning rules impose minimum copy numbers on both daughter compartments. These constraints can make the daughter totals exceed the corresponding pre-division amount for selected components and require further conservation review.</li>
+<li>The parameter Vrep is declared as a genome-replication threshold but is not currently used in the simulation logic. Genome copy number is raised inside the division procedure instead. The declared parameter R0 is also not used to initialise the ribosome count; the current cell structure starts with five ribosomes by default.</li>
+<li>The shared resource pool is updated sequentially as compartments are processed in a shuffled order. This makes resource access depend partly on processing order. In addition, the uptake event removes one whole unit whenever the pool is positive; if the remaining pool is between zero and one, a final uptake event can make the stored pool value negative.</li>
+<li>The current dataset contains no base_noTrans condition. The separate run30.cpp driver defines that condition, but its output schema differs from the schema used by all.csv. The present results therefore do not provide the complete factorial comparison needed to isolate the effect of disabling translation both with and without external catalyst C.</li>
+</ul>
+<h2>Next steps</h2>
+<ul>
+<li>Audit division and partitioning rules, including component conservation.</li>
+<li>Resolve the unused replication and initial-ribosome parameters.</li>
+<li>Generate the replicate-level dataset and verify the CSV schema.</li>
+<li>Review the statistical analysis, then publish reproducible tables and plots.</li>
+<li>Document the model assumptions and parameter rationale alongside the code.</li>
+</ul>
+<p>Research status: computational model and experiment drivers prepared; 30-replicate simulations across the comparison conditions and parameter grid analysed descriptively. Model-audit and statistical-validation work remains in progress.</p>
+<p class="small">Return to the Independent Research Initiative</p>
+</main>
+</body>
+</html>
