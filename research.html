@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Research programme of Vladislav Druzhka: origin of life, quantum foundations and insect bioacoustics.">
+<title>Research — DR / 03</title>
+
+<style>
+:root{
+ --paper:#f0eee5;--paper2:#e3e6dc;--ink:#192d32;
+ --muted:#647477;--green:#397d69;--teal:#167f83;
+ --rust:#c66b43;--blue:#365f9c;--line:#c7cec5;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:Georgia,"Times New Roman",serif}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--rust)}
+.wrap{width:min(1000px,90%);margin:auto}
+header{border-bottom:1px solid var(--line)}
+nav{min-height:76px;display:flex;justify-content:space-between;
+align-items:center;gap:20px}
+.logo{font:800 16px Arial,sans-serif;letter-spacing:2px}
+.logo span{color:var(--rust)}
+.navlinks{display:flex;gap:22px;font:11px Arial,sans-serif;
+text-transform:uppercase;letter-spacing:1px}
+main{padding:75px 0}
+.kicker,.label{font:11px Arial,sans-serif;text-transform:uppercase;
+letter-spacing:2px;color:var(--teal)}
+h1{font-size:clamp(48px,8vw,82px);font-weight:normal;
+letter-spacing:-3px;line-height:1;margin:20px 0}
+h2{font-size:34px;font-weight:normal;margin:12px 0}
+h3{font-size:23px;font-weight:normal;margin:12px 0}
+.lead{font-size:20px;line-height:1.7;color:var(--muted);
+max-width:760px}
+.intro{padding-bottom:55px;border-bottom:1px solid var(--line)}
+.project{padding:48px 0;border-bottom:1px solid var(--line)}
+.project-head{display:flex;justify-content:space-between;
+gap:20px;align-items:start}
+.number{font:12px Arial,sans-serif;color:var(--rust);
+letter-spacing:2px}
+.project p{font-size:16px;line-height:1.8;color:var(--muted);
+max-width:760px}
+.project strong{color:var(--ink)}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:25px;
+margin-top:25px}
+.detail{background:var(--paper2);padding:20px}
+.detail p{font-size:14px;margin-bottom:0}
+.status{display:inline-block;font:10px Arial,sans-serif;
+letter-spacing:1.5px;text-transform:uppercase;
+color:var(--green);border:1px solid var(--green);
+padding:7px 10px;margin-top:10px}
+.links{margin-top:20px;font:12px Arial,sans-serif;
+text-transform:uppercase;letter-spacing:1px}
+.links a{border-bottom:1px solid var(--teal);padding-bottom:4px;
+margin-right:20px;display:inline-block}
+.principles{padding:55px 0}
+.principles p{font-size:18px;line-height:1.8;color:var(--muted);
+max-width:780px}
+.support{background:var(--ink);color:#fffdf6;padding:35px;
+margin-top:25px}
+.support p{color:#c5d0ca;line-height:1.8;max-width:650px}
+.support a{display:inline-block;border:1px solid #8bd1b7;
+padding:13px 20px;margin-top:10px;font:11px Arial,sans-serif;
+text-transform:uppercase;letter-spacing:1px}
+footer{padding:30px 0;border-top:1px solid var(--line);
+font:11px Arial,sans-serif;color:var(--muted);
+display:flex;justify-content:space-between;gap:15px}
+@media(max-width:650px){
+ nav{align-items:flex-start;padding:20px 0;flex-direction:column}
+ .navlinks{gap:15px;flex-wrap:wrap}
+ main{padding:50px 0}
+ .project-head{display:block}
+ .details{grid-template-columns:1fr}
+ footer{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+<header>
+ <div class="wrap">
+  <nav>
+   <a class="logo" href="index.html">DR <span>/</span> 03</a>
+   <div class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="research-log.html">Research log</a>
+   </div>
+  </nav>
+ </div>
+</header>
+
+<main class="wrap">
+ <section class="intro">
+  <div class="kicker">Independent Research Atlas / Programme</div>
+  <h1>Research<br>directions.</h1>
+  <p class="lead">
+   My research explores questions across biological organisation,
+   physical theory and the history of life. I approach these
+   subjects through computational modelling, theoretical
+   analysis, comparative biology and open scientific work.
+  </p>
+ </section>
+
+ <section class="project">
+  <div class="project-head">
+   <div>
+    <div class="number">01 / ORIGIN OF LIFE</div>
+    <h2>Protocell Dynamics</h2>
+   </div>
+   <span class="status">Computational model</span>
+  </div>
+
+  <p>
+   How can simple chemical compartments develop persistent
+   organisation? What roles can catalysis, resource availability,
+   internal metabolism and inheritance play in the dynamics
+   of primitive cell-like systems?
+  </p>
+  <p>
+   This project uses an individual-based computational model
+   of protocell populations. The model explores interactions
+   between molecular components, catalytic processes,
+   resource uptake, enzyme production, growth, division
+   and the inheritance of model parameters.
+  </p>
+
+  <div class="details">
+   <div class="detail">
+    <div class="label">Methods</div>
+    <p>
+     C++ simulation, stochastic reaction modelling,
+     population-level analysis, repeated simulation runs
+     and comparison of model conditions.
+    </p>
+   </div>
+   <div class="detail">
+    <div class="label">Research questions</div>
+    <p>
+     Under what conditions can catalytic activity affect
+     population dynamics? What is the role of translation,
+     compartmentalisation and inheritance in the model?
+    </p>
+   </div>
+  </div>
+
+  <p>
+   The model is an exploratory theoretical system.
+   Its assumptions and limitations must be considered
+   when interpreting simulation outcomes.
+  </p>
+  <div class="links">
+   <a href="research/origin-of-life.html">Project details →</a>
+  </div>
+ </section>
+
+ <section class="project">
+  <div class="project-head">
+   <div>
+    <div class="number">02 / QUANTUM FOUNDATIONS</div>
+    <h2>Quantum Measurement</h2>
+   </div>
+   <span class="status">Theoretical research</span>
+  </div>
+
+  <p>
+   This direction examines the conceptual foundations of
+   quantum mechanics, with particular attention to ensemble
+   interpretations, the physical meaning of measurement
+   and the relationship between quantum systems and
+   their environments.
+  </p>
+  <p>
+   A central historical and conceptual reference is
+   D. I. Blokhintsev's approach to quantum theory.
+   The research also considers the relationship between
+   ensemble descriptions and decoherence, including
+   questions about whether measurement can be understood
+   without introducing a conscious observer.
+  </p>
+
+  <div class="details">
+   <div class="detail">
+    <div class="label">Methods</div>
+    <p>
+     Conceptual analysis, historical comparison of
+     interpretations, examination of foundational
+     literature and theoretical argumentation.
+    </p>
+   </div>
+   <div class="detail">
+    <div class="label">Research questions</div>
+    <p>
+     What is the physical status of the quantum ensemble?
+     How should measurement be understood in an
+     observer-independent physical description?
+    </p>
+   </div>
+  </div>
+
+  <p>
+   A preliminary manuscript on these questions is available
+   through Zenodo. It should be treated as a preprint,
+   not as a final peer-reviewed publication.
+  </p>
+  <div class="links">
+   <a href="https://doi.org/10.5281/zenodo.21740805"
+      target="_blank" rel="noopener">Read preprint →</a>
+   <a href="research/quantum-foundations.html">Project details →</a>
+  </div>
+ </section>
+
+ <section class="project">
+  <div class="project-head">
+   <div>
+    <div class="number">03 / PALEOSOUND</div>
+    <h2>Insect Acoustics</h2>
+   </div>
+   <span class="status">Research project</span>
+  </div>
+
+  <p>
+   PaleoSound explores the relationship between biological
+   structure and sound production, with a particular
+   research interest in grasshoppers and their acoustic
+   mechanisms.
+  </p>
+  <p>
+   The project brings together comparative morphology,
+   bioacoustics, fossil evidence and computational approaches
+   to investigate how anatomical structures can inform
+   hypotheses about sound production in organisms,
+   including those from the distant past.
+  </p>
+
+  <div class="details">
+   <div class="detail">
+    <div class="label">Methods</div>
+    <p>
+     Morphological comparison, literature-based evidence
+     gathering, acoustic analysis and computational
+     visualisation.
+    </p>
+   </div>
+   <div class="detail">
+    <div class="label">Research questions</div>
+    <p>
+     How do anatomical structures relate to sound production?
+     What can comparative biology tell us about the
+     acoustic capabilities of extinct organisms?
+    </p>
+   </div>
+  </div>
+
+  <p>
+   Reconstructions and acoustic hypotheses require explicit
+   treatment of uncertainty. Visualisations are not
+   substitutes for fossil measurements or acoustic data.
+  </p>
+  <div class="links">
+   <a href="https://github.com/vladimikal/paleosound"
+      target="_blank" rel="noopener">GitHub repository →</a>
+   <a href="research/paleosound.html">Project details →</a>
+  </div>
+ </section>
+
+ <section class="principles">
+  <div class="kicker">Research principles</div>
+  <h2>Evidence before appearance.</h2>
+  <p>
+   I aim to distinguish published findings, direct observations,
+   model outputs, working hypotheses and conceptual illustrations.
+   Computational results are interpreted in the context of
+   model assumptions and limitations. Uncertainty is part
+   of the research process and should be made visible.
+  </p>
+  <p>
+   Wherever possible, research materials, code and scientific
+   explanations will be made publicly accessible.
+  </p>
+
+  <div class="support">
+   <div class="label" style="color:#8bd1b7">Support independent research</div>
+   <h2>Help sustain open science.</h2>
+   <p>
+    Contributions help support computing, research materials,
+    data analysis and the preparation of public research outputs.
+    Core research materials will remain openly accessible.
+   </p>
+   <a href="https://ko-fi.com/vladuzka"
+      target="_blank" rel="noopener">Support on Ko-fi →</a>
+  </div>
+ </section>
+</main>
+
+<footer class="wrap">
+ <span>DR / 03 — Independent Research Atlas</span>
+ <span>Vladislav Druzhka · 2026</span>
+</footer>
+</body>
+  </html>
