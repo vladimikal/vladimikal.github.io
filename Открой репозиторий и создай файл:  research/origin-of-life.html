@@ -1,0 +1,105 @@
+
+
+DR / 03 — Independent Research Initiative
+Home Research overview
+
+RESEARCH AREA 01 · ORIGIN OF LIFE
+Protocell Dynamics
+
+Computational modelling of primitive cellular systems
+
+This project explores how resource availability, catalytic activity, internal reaction networks, inheritance and division can interact in a simplified population of protocell-like compartments.
+Research question
+
+Under what model conditions can simple compartmentalised systems maintain internal reaction activity, grow and divide while competing for a finite shared resource? How do externally supplied catalysis and the inheritance of kinetic properties affect population-level dynamics?
+
+The present model is a computational framework for exploring these relationships. It does not, by itself, demonstrate a historical pathway for the origin of life.
+Model overview
+
+The simulation represents a population of discrete compartments. Each compartment has internal molecular counts and a set of kinetic parameters. Reactions are simulated stochastically over a unit time interval for each generation. Cells interact indirectly through a finite shared pool of resource A.
+
+The stochastic reaction step uses the Gillespie direct-method structure: reaction propensities are calculated, a waiting time is sampled, and one reaction event is selected according to its propensity. The population is then updated through growth and division.
+
+A run begins with one founder compartment. The supplied experiment drivers run simulations for 80 generations, with 30 independent replicate seeds per condition. Population size is capped at 2,000 compartments.
+Internal reaction network
+
+The current implementation contains the following modelled processes.
+Reaction and process rules implemented in sim.hpp Process 	Model rule 	Interpretation in the simulation
+Resource uptake 	rate = influx × V 	Resource A enters from the shared pool; each uptake event removes one unit from the pool.
+Catalytic conversion by E 	A + E → B + E; rate = k1 × A × E / V 	Enzyme-like component E catalyses conversion of A into B.
+Transcription 	G → G + M; rate = kt × G 	Genome-copy count G drives production of messenger RNA M.
+Translation 	M + R → M + R + E; rate = kp × M × R / V 	Translation produces E, consumes one ATP unit, and depends on M and ribosome count R.
+Degradation 	E → ∅; M → ∅; A → ∅ 	Separate first-order degradation processes are defined for E, M and A.
+Energy conversion 	A → ATP; B → ATP 	The model includes a glycolysis-like ATP source from A and a respiration-like ATP source from B, modulated by the mitochondrial count.
+Vesicle packaging 	B ⇄ VB 	Component B can be packaged into and released from a modelled vesicle pool VB.
+Externally supplied catalyst C 	A + C → B + C 	When enabled, C enters from the environment, can decay, and catalyses conversion of A into B without being consumed by that reaction.
+Boundary export 	B → outside 	In permeability-enabled conditions, B can leave the compartment at a rate determined by its inherited permeability parameter.
+Growth, division and inheritance
+
+Compartment volume is an abstract model variable calculated as:
+
+V = V0 + gamma × (B + E + M + VB + R + C)
+
+A compartment divides when its calculated volume reaches Vmax. Before partitioning, the genome-copy count is raised to at least two. Molecular counts are distributed between the two daughters using binomial partitioning rules, with minimum copy-number constraints for selected components.
+
+The kinetic parameters k1, kp and kd are inherited with log-normal multiplicative variation at division. When the external catalyst is enabled, its catalytic parameter k1C is also inherited with multiplicative variation. In permeability-enabled simulations, the boundary permeability parameter can vary additively, subject to a lower bound of zero.
+Shared resource and changing environment
+
+All compartments draw resource A from one finite pool. Resource enters the pool at a generation-dependent rate. The environment alternates between a resource-rich and a resource-poor phase, with each phase lasting 25 generations in the default parameter set.
+
+The pool has a maximum capacity of 400 units and starts at half of that capacity. The default inflow is 8 units per generation, modified by an environmental amplitude of 0.7. Uptake by one compartment therefore changes the amount available to the others.
+Selected default parameters
+Default values defined in SimParams and the founder initialisation Parameter 	Default 	Role
+V0	1.0	Baseline volume
+Vmax	1.4	Division threshold
+influx	0.5	Resource uptake rate coefficient
+kdA	0.05	Degradation rate coefficient for A
+kt	0.50	Transcription rate coefficient
+kmd	0.10	Messenger RNA degradation rate coefficient
+kp	0.05	Founder translation parameter
+k1	1.0	Founder catalytic conversion parameter for E
+sigma	0.05	Log-normal variation scale for inherited kinetic parameters
+kC	0.05	External C influx coefficient when C is enabled
+k1C0	1.0	Founder catalytic parameter for C
+poolIn	8.0	Baseline resource inflow per generation
+amp	0.7	Amplitude of environmental resource oscillation
+period	25	Generations per environmental phase
+cap	2,000	Maximum population size
+Computational experiment design
+
+The supplied driver run_all.cpp defines a set of comparison conditions and a parameter grid. Each condition is run for 30 replicate seeds over 80 generations.
+Conditions configured in run_all.cpp Condition 	Configuration 	Intended comparison
+base	No external catalyst C; no boundary export	Reference condition
+cat	External catalyst C enabled	Effect of adding the C-mediated conversion pathway
+cat_noTrans	C enabled; translation disabled	Behaviour with C present but E production switched off
+cat_perm	C enabled; export of B through the boundary enabled	Combined C and boundary-export condition
+base_perm	No C; export of B through the boundary enabled	Boundary-export condition without C
+grid	C enabled; kC = 0.01, 0.05 or 0.10; k1C0 = 0.5, 1.0 or 2.0	Parameter-grid exploration of C influx and catalytic strength
+
+A second driver, run30.cpp, defines a separate four-condition comparison that also includes base_noTrans. It writes a different CSV column layout from run_all.cpp; the supplied analysis script is structured for the latter layout.
+Analysis workflow and current status
+
+The included analysis script selects population size at generation 80 and is configured to report medians, ranges, bootstrap intervals for differences in medians, and approximate Mann–Whitney p-values across replicate runs. These are analysis procedures specified in the code; they are not results.
+
+The archive supplied for this page contains the simulation header, two experiment drivers and the analysis script, but does not contain the generated all.csv dataset. Quantitative findings, plots and statistical conclusions are therefore not reported here. They should be added only after the output data have been generated and checked.
+Scope and limitations
+
+    This is a coarse-grained stochastic model. Its rules and numerical values are modelling assumptions, not measured biochemical constants.
+    The current code does not model the formation or physical mechanics of a lipid membrane. The optional boundary feature represents export of B through a simplified boundary parameter.
+    The genome is represented by a copy number, not by a nucleotide sequence. Heritable kinetic parameters are abstract traits; the model does not simulate genes or a real genotype-to-phenotype mapping.
+    Non-dividing compartments remain in the population. There is no explicit cell-death process; when the population exceeds its cap, excess compartments are removed by random truncation.
+    The volume expression is a proxy defined by selected internal counts. It is not a geometrical reconstruction of a cell or a physical equation of state.
+    Some partitioning rules impose minimum copy numbers on both daughter compartments. These constraints can make the daughter totals exceed the corresponding pre-division amount for selected components and require further conservation review.
+    The parameter Vrep is declared as a genome-replication threshold but is not currently used in the simulation logic. Genome copy number is raised inside the division procedure instead. The declared parameter R0 is also not used to initialise the ribosome count; the current cell structure starts with five ribosomes by default.
+
+Next steps
+
+    Audit division and partitioning rules, including component conservation.
+    Resolve the unused replication and initial-ribosome parameters.
+    Generate the replicate-level dataset and verify the CSV schema.
+    Review the statistical analysis, then publish reproducible tables and plots.
+    Document the model assumptions and parameter rationale alongside the code.
+
+Research status: computational model and experiment drivers prepared; quantitative results pending data generation and validation.
+
+Return to the Independent Research Initiative
