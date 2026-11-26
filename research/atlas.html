@@ -16,6 +16,8 @@ main{width:min(960px,92%);margin:0 auto;padding:56px 0 80px}
 .kicker{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
 h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margin:12px 0 8px;line-height:1.05}
 .lead{font-size:19px;color:var(--muted);max-width:720px}
+.progress{font:13px Arial,sans-serif;color:var(--muted);margin:22px 0 0}
+.progress b{color:var(--ink);font-weight:normal}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 8px}
 .chip{font:12px Arial,sans-serif;border:1px solid var(--line);background:none;color:var(--ink);padding:6px 12px;cursor:pointer;border-radius:999px}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -74,6 +76,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 <h1>Where the work stands</h1>
 <p class="lead">A timeline of the project, top to bottom: what is done, which hypothesis is being tested, what is planned and which laboratory data are still missing. Click a card for details.</p>
 
+<p class="progress" id="progress"></p>
 <div class="legend" role="group" aria-label="Filter by status">
  <button class="chip" data-filter="all" aria-pressed="true">All</button>
  <button class="chip" data-filter="done" aria-pressed="false"><span class="dot" style="background:var(--green)"></span>Done</button>
@@ -114,7 +117,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
     ]},
     { name: 'Hypotheses', nodes: [
       { t: 'Mineral hypothesis (chosen direction)', s: 'active', x: 'Minerals and water as the setting for the first reactions. The exact formulation is still being written.' },
-      { t: 'Lake version', s: 'active', x: 'Evaporating lake systems that concentrate chemicals and minerals. Example case: Last Chance Lake (Haas et al. 2024).' },
+      { t: 'Lake version', s: 'active', x: 'Evaporating lake systems that concentrate chemicals and minerals. Example case: Last Chance Lake. Source: Haas et al. 2024, Communications Earth & Environment, doi:10.1038/s43247-023-01192-8.' },
       { t: 'Hydrothermal vents (comparison)', s: 'alt', x: 'Alternative setting for comparison, for example the Lost City vent field (found in 2000).' }
     ]},
     { name: 'What to look for', nodes: [
@@ -136,6 +139,9 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
     ]}
   ];
 
+  var doneCount = 0, total = 0;
+  STAGES.forEach(function (st) { st.nodes.forEach(function (n) { if (n.s !== 'alt') { total++; if (n.s === 'done') doneCount++; } }); });
+  document.getElementById('progress').innerHTML = 'Done: <b>' + doneCount + '</b> of ' + total + ' tracked items · stages: ' + STAGES.length;
   var chain = document.getElementById('chain');
   var items = [];
   var k = 0;
