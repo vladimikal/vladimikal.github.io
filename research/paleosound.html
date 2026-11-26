@@ -3,30 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="PaleoSound: evidence-based reconstruction of possible sounds of extinct organisms.">
+<meta name="description" content="PaleoSound: evidence-based reconstruction of possible sounds of extinct organisms. Illustrations, sources and audio from the Rhynie chert project.">
 <title>PaleoSound — DR / 03</title>
 <style>
-:root{--paper:#eeeade;--ink:#202a29;--muted:#69716a;--green:#648477;--line:#c9c4b5}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1c2322;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--line:#3a4544}}
-:root[data-theme="dark"]{--paper:#1c2322;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--line:#3a4544}
+:root{--paper:#eeeade;--paper2:#e4dfd1;--ink:#202a29;--muted:#69716a;--green:#648477;--rust:#ad654a;--line:#c9c4b5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1c2322;--paper2:#243030;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--rust:#e0997c;--line:#3a4544}}
+:root[data-theme="dark"]{--paper:#1c2322;--paper2:#243030;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--rust:#e0997c;--line:#3a4544}
+*{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}
-main{width:min(760px,90%);margin:0 auto;padding:60px 0 80px}
+main{width:min(1000px,90%);margin:0 auto;padding:60px 0 80px}
 a{color:var(--green)}
-.kicker{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
-h1{font-weight:normal;font-size:clamp(38px,6vw,60px);letter-spacing:-1.5px;margin:14px 0}
-p{font-size:17px}
-.muted{color:var(--muted)}
-.small{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+.kicker,.small{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
+.small{color:var(--muted);letter-spacing:1.5px}
+h1{font-weight:normal;font-size:clamp(40px,7vw,76px);letter-spacing:-2px;margin:14px 0 10px;line-height:1}
+h2{font-weight:normal;font-size:clamp(26px,4vw,36px);margin:64px 0 14px;padding-top:24px;border-top:1px solid var(--line)}
+p,li{font-size:17px;max-width:680px}
+.lead{font-size:20px;color:var(--muted)}
+.note{border-left:3px solid var(--rust);padding:6px 16px;color:var(--muted);max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:24px}
+figure{margin:0;background:var(--paper2);border:1px solid var(--line);padding:14px}
+figure img{display:block;width:100%;height:auto}
+figcaption{font:13px Arial,sans-serif;color:var(--muted);margin-top:10px;line-height:1.5}
+figcaption b{color:var(--ink);font-weight:normal}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.audio{border:1px solid var(--line);padding:18px;margin-top:16px;background:var(--paper2)}
+.audio h3{font-weight:normal;font-size:20px;margin:0 0 8px}
+.audio p{font:13px Arial,sans-serif;color:var(--muted);margin:0 0 10px}
+audio{width:100%}
+table{width:100%;border-collapse:collapse;font:14px Arial,sans-serif;margin-top:16px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--green);font-weight:normal;text-transform:uppercase;font-size:11px;letter-spacing:1px}
+.table-wrap{overflow-x:auto}
+.wave{display:block;width:100%;height:auto;max-width:720px;margin:18px 0 6px;color:var(--green)}
+.wave-shape{fill:var(--green);fill-opacity:.18;stroke:var(--green);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s ease-out .2s forwards}
+.wave-axis{stroke:var(--line);stroke-width:1}
+@keyframes draw{to{stroke-dashoffset:0;fill-opacity:.18}}
+@media (prefers-reduced-motion: reduce){.wave-shape{animation:none;stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
 <main>
+
 <p class="kicker">Research area 03 · Computational paleobiology</p>
 <h1>PaleoSound</h1>
-<p class="muted">Evidence-based approaches to reconstructing possible sounds of extinct organisms from fossil anatomy and the scientific literature.</p>
-<p>Planned focus: fossil evidence, acoustic models, and explicit treatment of uncertainty.</p>
-<p class="small">Status: placeholder. Content is in preparation and has not been published.</p>
+<p class="lead">Possible sounds of extinct organisms, reconstructed from fossil evidence and the scientific literature. Work in progress.</p>
+
+<svg class="wave" viewBox="0 0 720 160" role="img" aria-label="Waveform of model sound A, about 3 seconds" preserveAspectRatio="none"><path class="wave-shape" d="M0.0,15.2 L3.0,80.0 L6.0,80.0 L9.0,80.0 L12.1,80.0 L15.1,80.0 L18.1,15.2 L21.1,80.0 L24.1,80.0 L27.1,80.0 L30.1,80.0 L33.1,80.0 L36.2,15.2 L39.2,80.0 L42.2,80.0 L45.2,80.0 L48.2,80.0 L51.2,80.0 L54.2,15.2 L57.2,80.0 L60.3,80.0 L63.3,80.0 L66.3,80.0 L69.3,80.0 L72.3,15.2 L75.3,80.0 L78.3,80.0 L81.3,80.0 L84.4,80.0 L87.4,80.0 L90.4,15.2 L93.4,80.0 L96.4,80.0 L99.4,80.0 L102.4,80.0 L105.4,80.0 L108.5,15.2 L111.5,76.2 L114.5,80.0 L117.5,80.0 L120.5,80.0 L123.5,80.0 L126.5,80.0 L129.5,15.2 L132.6,80.0 L135.6,80.0 L138.6,80.0 L141.6,80.0 L144.6,80.0 L147.6,15.2 L150.6,80.0 L153.6,80.0 L156.7,80.0 L159.7,80.0 L162.7,80.0 L165.7,15.2 L168.7,80.0 L171.7,80.0 L174.7,80.0 L177.7,80.0 L180.8,80.0 L183.8,15.2 L186.8,80.0 L189.8,80.0 L192.8,80.0 L195.8,80.0 L198.8,80.0 L201.8,15.2 L204.9,80.0 L207.9,80.0 L210.9,80.0 L213.9,80.0 L216.9,80.0 L219.9,15.2 L222.9,80.0 L225.9,80.0 L229.0,80.0 L232.0,80.0 L235.0,80.0 L238.0,15.2 L241.0,67.2 L244.0,80.0 L247.0,80.0 L250.0,80.0 L253.1,80.0 L256.1,80.0 L259.1,15.2 L262.1,80.0 L265.1,80.0 L268.1,80.0 L271.1,80.0 L274.1,80.0 L277.2,15.2 L280.2,80.0 L283.2,80.0 L286.2,80.0 L289.2,80.0 L292.2,80.0 L295.2,15.2 L298.2,80.0 L301.3,80.0 L304.3,80.0 L307.3,80.0 L310.3,80.0 L313.3,15.2 L316.3,80.0 L319.3,80.0 L322.3,80.0 L325.4,80.0 L328.4,80.0 L331.4,15.2 L334.4,80.0 L337.4,80.0 L340.4,80.0 L343.4,80.0 L346.4,80.0 L349.5,15.2 L352.5,79.4 L355.5,80.0 L358.5,80.0 L361.5,80.0 L364.5,80.0 L367.5,15.2 L370.5,45.4 L373.6,80.0 L376.6,80.0 L379.6,80.0 L382.6,80.0 L385.6,80.0 L388.6,15.2 L391.6,80.0 L394.6,80.0 L397.7,80.0 L400.7,80.0 L403.7,80.0 L406.7,15.2 L409.7,80.0 L412.7,80.0 L415.7,80.0 L418.7,80.0 L421.8,80.0 L424.8,15.2 L427.8,80.0 L430.8,80.0 L433.8,80.0 L436.8,80.0 L439.8,80.0 L442.8,15.2 L445.9,80.0 L448.9,80.0 L451.9,80.0 L454.9,80.0 L457.9,80.0 L460.9,15.2 L463.9,80.0 L466.9,80.0 L470.0,80.0 L473.0,80.0 L476.0,80.0 L479.0,15.2 L482.0,78.0 L485.0,80.0 L488.0,80.0 L491.0,80.0 L494.1,80.0 L497.1,80.0 L500.1,15.2 L503.1,80.0 L506.1,80.0 L509.1,80.0 L512.1,80.0 L515.1,80.0 L518.2,15.2 L521.2,80.0 L524.2,80.0 L527.2,80.0 L530.2,80.0 L533.2,80.0 L536.2,15.2 L539.2,80.0 L542.3,80.0 L545.3,80.0 L548.3,80.0 L551.3,80.0 L554.3,15.2 L557.3,80.0 L560.3,80.0 L563.3,80.0 L566.4,80.0 L569.4,80.0 L572.4,15.2 L575.4,80.0 L578.4,80.0 L581.4,80.0 L584.4,80.0 L587.4,80.0 L590.5,15.2 L593.5,80.0 L596.5,80.0 L599.5,80.0 L602.5,80.0 L605.5,80.0 L608.5,15.2 L611.5,72.8 L614.6,80.0 L617.6,80.0 L620.6,80.0 L623.6,80.0 L626.6,80.0 L629.6,15.2 L632.6,80.0 L635.6,80.0 L638.7,80.0 L641.7,80.0 L644.7,80.0 L647.7,15.2 L650.7,80.0 L653.7,80.0 L656.7,80.0 L659.7,80.0 L662.8,80.0 L665.8,15.2 L668.8,80.0 L671.8,80.0 L674.8,80.0 L677.8,80.0 L680.8,80.0 L683.8,15.2 L686.9,80.0 L689.9,80.0 L692.9,80.0 L695.9,80.0 L698.9,80.0 L701.9,15.2 L704.9,80.0 L707.9,80.0 L711.0,80.0 L714.0,80.0 L717.0,80.0 L720.0,15.2 L720.0,135.5 L717.0,80.0 L714.0,80.0 L711.0,80.0 L707.9,80.0 L704.9,80.0 L701.9,135.5 L698.9,80.0 L695.9,80.0 L692.9,80.0 L689.9,80.0 L686.9,80.0 L683.8,135.5 L680.8,80.0 L677.8,80.0 L674.8,80.0 L671.8,80.0 L668.8,80.0 L665.8,135.5 L662.8,80.0 L659.7,80.0 L656.7,80.0 L653.7,80.0 L650.7,80.0 L647.7,135.5 L644.7,80.0 L641.7,80.0 L638.7,80.0 L635.6,80.0 L632.6,80.0 L629.6,135.5 L626.6,80.0 L623.6,80.0 L620.6,80.0 L617.6,80.0 L614.6,80.0 L611.5,86.1 L608.5,135.5 L605.5,80.0 L602.5,80.0 L599.5,80.0 L596.5,80.0 L593.5,80.0 L590.5,135.5 L587.4,80.0 L584.4,80.0 L581.4,80.0 L578.4,80.0 L575.4,80.0 L572.4,135.5 L569.4,80.0 L566.4,80.0 L563.3,80.0 L560.3,80.0 L557.3,80.0 L554.3,135.5 L551.3,80.0 L548.3,80.0 L545.3,80.0 L542.3,80.0 L539.2,80.0 L536.2,135.5 L533.2,80.0 L530.2,80.0 L527.2,80.0 L524.2,80.0 L521.2,80.0 L518.2,135.5 L515.1,80.0 L512.1,80.0 L509.1,80.0 L506.1,80.0 L503.1,80.0 L500.1,135.5 L497.1,80.0 L494.1,80.0 L491.0,80.0 L488.0,80.0 L485.0,80.0 L482.0,82.4 L479.0,135.5 L476.0,80.0 L473.0,80.0 L470.0,80.0 L466.9,80.0 L463.9,80.0 L460.9,135.5 L457.9,80.0 L454.9,80.0 L451.9,80.0 L448.9,80.0 L445.9,80.0 L442.8,135.5 L439.8,80.0 L436.8,80.0 L433.8,80.0 L430.8,80.0 L427.8,80.0 L424.8,135.5 L421.8,80.0 L418.7,80.0 L415.7,80.0 L412.7,80.0 L409.7,80.0 L406.7,135.5 L403.7,80.0 L400.7,80.0 L397.7,80.0 L394.6,80.0 L391.6,80.0 L388.6,135.5 L385.6,80.0 L382.6,80.0 L379.6,80.0 L376.6,80.0 L373.6,80.0 L370.5,120.5 L367.5,135.5 L364.5,80.0 L361.5,80.0 L358.5,80.0 L355.5,80.0 L352.5,80.7 L349.5,135.5 L346.4,80.0 L343.4,80.0 L340.4,80.0 L337.4,80.0 L334.4,80.0 L331.4,135.5 L328.4,80.0 L325.4,80.0 L322.3,80.0 L319.3,80.0 L316.3,80.0 L313.3,135.5 L310.3,80.0 L307.3,80.0 L304.3,80.0 L301.3,80.0 L298.2,80.0 L295.2,135.5 L292.2,80.0 L289.2,80.0 L286.2,80.0 L283.2,80.0 L280.2,80.0 L277.2,135.5 L274.1,80.0 L271.1,80.0 L268.1,80.0 L265.1,80.0 L262.1,80.0 L259.1,135.5 L256.1,80.0 L253.1,80.0 L250.0,80.0 L247.0,80.0 L244.0,80.0 L241.0,91.5 L238.0,135.5 L235.0,80.0 L232.0,80.0 L229.0,80.0 L225.9,80.0 L222.9,80.0 L219.9,135.5 L216.9,80.0 L213.9,80.0 L210.9,80.0 L207.9,80.0 L204.9,80.0 L201.8,135.5 L198.8,80.0 L195.8,80.0 L192.8,80.0 L189.8,80.0 L186.8,80.0 L183.8,135.5 L180.8,80.0 L177.7,80.0 L174.7,80.0 L171.7,80.0 L168.7,80.0 L165.7,135.5 L162.7,80.0 L159.7,80.0 L156.7,80.0 L153.6,80.0 L150.6,80.0 L147.6,135.5 L144.6,80.0 L141.6,80.0 L138.6,80.0 L135.6,80.0 L132.6,80.0 L129.5,135.5 L126.5,80.0 L123.5,80.0 L120.5,80.0 L117.5,80.0 L114.5,80.0 L111.5,83.3 L108.5,135.5 L105.4,80.0 L102.4,80.0 L99.4,80.0 L96.4,80.0 L93.4,80.0 L90.4,135.5 L87.4,80.0 L84.4,80.0 L81.3,80.0 L78.3,80.0 L75.3,80.0 L72.3,135.5 L69.3,80.0 L66.3,80.0 L63.3,80.0 L60.3,80.0 L57.2,80.0 L54.2,135.5 L51.2,80.0 L48.2,80.0 L45.2,80.0 L42.2,80.0 L39.2,80.0 L36.2,135.5 L33.1,80.0 L30.1,80.0 L27.1,80.0 L24.1,80.0 L21.1,80.0 L18.1,135.5 L15.1,80.0 L12.1,80.0 L9.0,80.0 L6.0,80.0 L3.0,80.0 L0.0,135.5 Z" pathLength="1"/><line x1="0" x2="720" y1="80.0" y2="80.0" class="wave-axis"/></svg>
+<p class="small">Waveform of model sound A (archaboilus_model_v2, about 3 s). Drawn from the audio envelope.</p>
+<p class="note">Everything on this page that is not a citation is an illustration or a model, not measured data. Bubbles, steam, geysers, volcano shape and sound design are artistic choices driven by the audio. Only the facts listed under "Sources" come from the literature.</p>
+
+<h2>Setting: Rhynie chert</h2>
+<p>The Early Devonian Rhynie chert is a silica-rich hot-spring and volcanic deposit. It preserves small plants and arthropods in unusual detail. The illustrations below show a plausible scene for that setting. They are not reconstructions of specific organisms or sites.</p>
+
+<div class="grid">
+ <figure class="reveal">
+  <img src="paleosound/stills/f_quiet_seed42.png" alt="Illustrated hot-spring landscape at dusk with a volcano and a quiet pool" loading="lazy" width="1280" height="720">
+  <figcaption><b>Quiet pool.</b> Hot-spring setting. Layout and volcano shape come from the shader, not from the literature.</figcaption>
+ </figure>
+ <figure class="reveal">
+  <img src="paleosound/stills/f_boil_seed42.png" alt="Illustrated pool with bubbles and steam" loading="lazy" width="1280" height="720">
+  <figcaption><b>Boiling pool.</b> Bubbles and steam are illustration, not data. Plants in the scene grew in diverse communities.</figcaption>
+ </figure>
+ <figure class="reveal">
+  <img src="paleosound/stills/f_geyser_seed42.png" alt="Illustrated geyser eruption with small leafless plants" loading="lazy" width="1280" height="720">
+  <figcaption><b>Geyser eruption.</b> All macroplants were centimetre-scale; no trees existed. Geyser positions are not from the literature.</figcaption>
+ </figure>
+</div>
+
+<h2>Plants and arthropods</h2>
+<div class="grid">
+ <figure class="reveal">
+  <img src="paleosound/stills/macro_plants_seed42.png" alt="Illustration of leafless forking stems with terminal sporangia" loading="lazy" width="1280" height="720">
+  <figcaption><b>Rhynia / Aglaophyton.</b> Leafless, no roots, forking stems with terminal sporangia. Aglaophyton about 2.5–5 cm tall (from teaching material, not a primary source).</figcaption>
+ </figure>
+ <figure class="reveal">
+  <img src="paleosound/stills/arthropod_macro_seed42.png" alt="Illustration of small arthropods on a hot-spring substrate" loading="lazy" width="1280" height="720">
+  <figcaption><b>Arthropods.</b> Trigonotarbids were extinct spider-like arachnids without spinnerets and with a segmented abdomen, and they were predators. Springtails and mites were present; no winged insects.</figcaption>
+ </figure>
+</div>
+
+<h2>Sound</h2>
+<p>Each scene is driven by a recording. The sound is split into three bands, and each band controls part of the image:</p>
+<ul>
+ <li><b>20–200 Hz:</b> ground tremor, stem sway, crater glow, ash plume strength.</li>
+ <li><b>200–1500 Hz:</b> rate of bubble events and foam.</li>
+ <li><b>1.5–8 kHz:</b> steam density, eruption strength, steam rise speed.</li>
+</ul>
+<p class="note">The band mapping is a design choice for visualisation. It is not a claim about how Devonian organisms or environments sounded.</p>
+
+<div class="audio">
+ <h3>Model sound A — Archaboilus musicus (v2 model)</h3>
+ <p>Model output, about 3 s, mono, 96 kHz. Not a reconstruction of a documented species. Method and parameters to be described.</p>
+ <audio controls preload="none" src="paleosound/audio/archaboilus_model_v2.wav">Your browser does not support audio.</audio>
+</div>
+<div class="audio">
+ <h3>Illustrative sound B — Sigmaboilus peregrinus</h3>
+ <p>Illustrative only, about 0.2 s, mono, 96 kHz. Not a reconstruction of a documented species.</p>
+ <audio controls preload="none" src="paleosound/audio/sigmaboilus_illustrative.wav">Your browser does not support audio.</audio>
+</div>
+
+<h2>Sources</h2>
+<p>Facts used on this page are taken from the following kinds of sources. Full references will be added as they are checked.</p>
+<div class="table-wrap">
+<table>
+ <tr><th>Statement</th><th>Status</th></tr>
+ <tr><td>Rhynie chert: Early Devonian, hot-spring and volcanic setting, silica-rich</td><td>Literature. Reference to be added.</td></tr>
+ <tr><td>Rhynia / Aglaophyton: leafless, no roots, forking stems, terminal sporangia</td><td>Literature. Reference to be added.</td></tr>
+ <tr><td>Aglaophyton height 2.5–5 cm</td><td>Teaching material, not a primary source. To be checked.</td></tr>
+ <tr><td>Trigonotarbids and arthropod assemblage</td><td>Literature. Reference to be added.</td></tr>
+ <tr><td>Bubbles, steam, geysers, volcano, sound mapping</td><td>Illustration or design choice. Not data.</td></tr>
+</table>
+</div>
+
+<h2>Status</h2>
+<p class="small">Placeholder audio and text will be replaced as the work progresses. Nothing on this page has been peer-reviewed.</p>
+
 <p><a href="../index.html">← Back to the Independent Research Atlas</a></p>
+
 </main>
+
+<script>
+(function () {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>
