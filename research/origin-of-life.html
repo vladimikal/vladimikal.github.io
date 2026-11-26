@@ -151,6 +151,17 @@ th{color:var(--green);font-weight:normal;text-transform:uppercase;font-size:11px
 <li>The shared resource pool is updated sequentially as compartments are processed in a shuffled order. This makes resource access depend partly on processing order. In addition, the uptake event removes one whole unit whenever the pool is positive; if the remaining pool is between zero and one, a final uptake event can make the stored pool value negative.</li>
 <li>The current dataset contains no base_noTrans condition. The separate run30.cpp driver defines that condition, but its output schema differs from the schema used by all.csv. The present results therefore do not provide the complete factorial comparison needed to isolate the effect of disabling translation both with and without external catalyst C.</li>
 </ul>
+<h2>Starting point: Oparin's coacervates</h2>
+<p>This project began from A. I. Oparin's hypothesis that the first protocells were coacervates: droplets that form spontaneously when certain colloids, such as gum arabic and gelatin, are mixed in water. Coacervates are not alive. Oparin's point was that they separate from the surrounding solution and can concentrate substances inside themselves, which is a physical precondition for metabolism and for compartmentalised chemistry.</p>
+<p>The classic demonstration, shown in a Soviet-era textbook plate (figure caption in Russian), shows coacervate droplets that take up methylene blue. The dye is absorbed into the droplets and turns them blue, while the surrounding solution becomes nearly colourless.</p>
+<p>The present project does not model coacervates. The protocell simulation above describes populations of compartments with internal reaction networks, and it has no droplet–solution exchange of this kind. A separate, minimal illustration of the coacervate idea is given in <a href="coacervate/coacervate_uptake.svg">research/coacervate</a>:</p>
+<ul>
+<li>A droplet of fixed volume exchanges solute with a large bath through a boundary of permeability P.</li>
+<li>Partitioning coefficient K sets the equilibrium ratio of concentration inside to concentration outside.</li>
+<li>Permeability changes how fast equilibrium is reached, not the equilibrium value.</li>
+</ul>
+<p>These are assumed parameters, not measured constants, and the model is illustrative only. Its outputs are an exchange relation, not evidence that coacervates reproduced or evolved.</p>
+<p><img src="coacervate/coacervate_uptake.svg" alt="Coacervate uptake model: concentration ratio over time for different partition coefficients K and permeabilities P" style="max-width:100%;height:auto"></p>
 <h2>Next steps</h2>
 <ul>
 <li>Audit division and partitioning rules, including component conservation.</li>
