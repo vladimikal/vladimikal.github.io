@@ -24,21 +24,20 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 /* horizontal roadmap: one spine, rings on it, cards above/below, stage blocks along it */
 .scroll{overflow-x:auto;margin-top:40px;padding:10px 0 24px;-webkit-overflow-scrolling:touch}
 .track{position:relative;display:flex;align-items:stretch;min-width:max-content;padding:0 12px}
-.spine{position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:var(--line);transform:scaleX(0);transform-origin:left center;transition:transform 1.6s ease}
+.spine{position:absolute;left:0;right:0;top:196px;height:2px;margin-top:-1px;background:var(--line);transform:scaleX(0);transform-origin:left center;transition:transform 1.6s ease}
 .track.drawn .spine{transform:scaleX(1)}
-.seg{position:relative;display:flex;flex-direction:column;padding:0 14px}
+.seg{position:relative;display:flex;flex-direction:column;padding:0 14px;padding-top:36px}
 .seg-name{position:absolute;top:0;left:14px;font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.6px;color:var(--paper);background:var(--ink);padding:5px 10px;white-space:nowrap}
 .up,.down{height:170px;display:flex;align-items:flex-end;justify-content:center;position:relative}
 .down{align-items:flex-start;padding-top:0}
 .seg-name-wrap{height:0}
-.item{display:flex;flex-direction:column;width:230px;flex:0 0 230px;position:relative}
+.item{display:flex;flex-direction:column;width:230px;flex:0 0 230px;position:relative;height:392px}
 .item .slot-up,.item .slot-down{height:170px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:0}
 .item .slot-down{align-items:flex-start;padding-top:0}
 .item .mid{position:relative;height:52px;display:flex;justify-content:center;align-items:center}
 .ring{position:relative;z-index:1;width:40px;height:40px;border-radius:50%;border:2px solid var(--c);background:var(--paper);cursor:pointer;padding:0;opacity:0;transform:scale(.4);transition:transform .45s cubic-bezier(.2,.9,.3,1.3),opacity .45s ease,box-shadow .25s ease}
 .ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--c)}
-.s-todo .ring::after,.s-future .ring::after{background:var(--paper);border:2px solid var(--c);inset:6px}
-.s-future .ring{border-style:dashed}
+.s-later .ring{border-style:dashed}
 .s-done .ring{background:var(--c)}
 .s-done .ring::after{background:var(--paper);inset:12px}
 .s-alt .ring{opacity:.6}
@@ -59,7 +58,14 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 .card:hover,.card:focus-visible{box-shadow:0 8px 22px rgba(32,42,41,.1);outline:none}
 .card .title{display:block;font-size:15px;line-height:1.35}
 .card .st{display:inline-block;margin-top:6px;font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
-.s-active{--c:var(--ink)}
+.s-done{--c:var(--green)}
+.s-soon{--c:var(--rust)}
+.s-plan{--c:var(--ink)}
+.s-later{--c:var(--muted)}
+.s-alt{--c:var(--line)}
+.s-soon .ring::after{background:var(--rust)}
+.s-plan .ring::after{background:var(--paper);border:2px solid var(--ink);inset:6px}
+.s-later .ring::after{background:var(--paper);border:2px dashed var(--muted);inset:6px}
 .hidden{display:none!important}
 .detail{position:fixed;right:20px;bottom:20px;width:min(380px,calc(100% - 40px));background:var(--white);border:1px solid var(--line);padding:20px;box-shadow:0 14px 40px rgba(32,42,41,.14);transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:10}
 .detail.open{opacity:1;transform:none;pointer-events:auto}
@@ -102,10 +108,8 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 <div class="legend" role="group" aria-label="Filter by status">
  <button class="chip" data-filter="all" aria-pressed="true">All</button>
  <button class="chip" data-filter="done" aria-pressed="false"><span class="dot" style="background:var(--green)"></span>Done</button>
- <button class="chip" data-filter="draft" aria-pressed="false"><span class="dot" style="background:var(--rust)"></span>Draft</button>
- <button class="chip" data-filter="active" aria-pressed="false"><span class="dot" style="background:var(--ink)"></span>In focus</button>
- <button class="chip" data-filter="todo" aria-pressed="false"><span class="dot" style="border:1.5px solid var(--muted);background:none"></span>Next</button>
- <button class="chip" data-filter="future" aria-pressed="false"><span class="dot" style="border:1.5px dashed var(--muted);background:none"></span>Later</button>
+ <button class="chip" data-filter="soon" aria-pressed="false"><span class="dot" style="background:var(--rust)"></span>Coming soon</button>
+ <button class="chip" data-filter="plan" aria-pressed="false"><span class="dot" style="border:1.5px solid var(--ink);background:none"></span>Planned</button>
 </div>
 
 <div class="scroll-wrap" id="swrap"><div class="scroll" id="scroll"><div class="track" id="track"><span class="spine"></span></div></div><div class="scroll-bar"><i id="sbar"></i></div></div>
@@ -126,12 +130,12 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 <script>
 (function () {
   var STATUS = {
-    done:   { label: 'Done',   cls: 's-done' },
-    draft:  { label: 'Draft',  cls: 's-draft' },
-    active: { label: 'In focus', cls: 's-active' },
-    todo:   { label: 'Next',   cls: 's-todo' },
-    future: { label: 'Later',  cls: 's-future' },
-    alt:    { label: 'Alternative', cls: 's-alt' }
+    done:   { label: 'Done',        cls: 's-done',  group: 'done' },
+    draft:  { label: 'Coming soon', cls: 's-soon',  group: 'soon' },
+    active: { label: 'Coming soon', cls: 's-soon',  group: 'soon' },
+    todo:   { label: 'Planned',     cls: 's-plan',  group: 'plan' },
+    future: { label: 'Planned',     cls: 's-later', group: 'plan' },
+    alt:    { label: 'Alternative', cls: 's-alt',   group: 'alt' }
   };
   var STAGES = [
     { name: 'Now', nodes: [
@@ -204,10 +208,12 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
       var go = function () { open(st.name, n, card); };
       ring.addEventListener('click', go);
       card.addEventListener('click', go);
-      if (up) { item.appendChild(slot); item.appendChild(mid); }
-      else { item.appendChild(mid); item.appendChild(slot); }
+      var empty = document.createElement('div');
+      empty.className = up ? 'slot-down' : 'slot-up';
+      if (up) { item.appendChild(slot); item.appendChild(mid); item.appendChild(empty); }
+      else { item.appendChild(empty); item.appendChild(mid); item.appendChild(slot); }
       seg.appendChild(item);
-      items.push({ item: item, ring: ring, card: card });
+      items.push({ item: item, ring: ring, card: card, group: s.group });
       k++;
     });
     track.appendChild(seg);
@@ -265,7 +271,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
     c.addEventListener('click', function () {
       var f = c.dataset.filter;
       document.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
-      items.forEach(function (it) { it.item.classList.toggle('hidden', f !== 'all' && it.item.dataset.status !== f); });
+      items.forEach(function (it) { it.item.classList.toggle('hidden', f !== 'all' && it.group !== f); });
     });
   });
 })();
