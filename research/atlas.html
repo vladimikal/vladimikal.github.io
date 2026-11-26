@@ -6,77 +6,99 @@
 <meta name="description" content="Research atlas: where the origin-of-life protein and protocell work stands, what is being tested and what is planned.">
 <title>Research Atlas — Origin of Life · DR / 03</title>
 <style>
-:root{--paper:#eeeade;--paper2:#e4dfd1;--ink:#202a29;--muted:#69716a;--green:#648477;--rust:#ad654a;--line:#c9c4b5;--white:#f8f6ef;--c-done:#648477;--c-draft:#ad654a;--c-active:#202a29;--c-todo:#69716a;--c-future:#69716a;--c-alt:#c9c4b5}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#151d1c;--paper2:#1e2827;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--rust:#e0997c;--line:#3a4544;--white:#1e2827;--c-active:#e6e3d8;--c-alt:#3a4544}}
-:root[data-theme="dark"]{--paper:#151d1c;--paper2:#1e2827;--ink:#e6e3d8;--muted:#a9b0a8;--green:#9cc0af;--rust:#e0997c;--line:#3a4544;--white:#1e2827;--c-active:#e6e3d8;--c-alt:#3a4544}
+:root{--paper:#eeeade;--paper2:#e4dfd1;--ink:#202a29;--muted:#69716a;--green:#648477;--rust:#ad654a;--line:#c9c4b5;--white:#f8f6ef}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
 a{color:var(--green)}
-main{width:min(960px,92%);margin:0 auto;padding:56px 0 80px}
+main{width:min(1200px,92%);margin:0 auto;padding:56px 0 80px}
 .kicker{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
 h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margin:12px 0 8px;line-height:1.05}
 .lead{font-size:19px;color:var(--muted);max-width:720px}
 .progress{font:13px Arial,sans-serif;color:var(--muted);margin:22px 0 0}
 .progress b{color:var(--ink);font-weight:normal}
-.legend{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 8px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
 .chip{font:12px Arial,sans-serif;border:1px solid var(--line);background:none;color:var(--ink);padding:6px 12px;cursor:pointer;border-radius:999px}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
-/* timeline: spine in the centre, rings on it, cards alternate left/right */
-.timeline{position:relative;margin-top:44px;padding:12px 0 24px}
-.spine{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--line);transform:scaleY(0);transform-origin:top;transition:transform 1.6s ease}
-.timeline.drawn .spine{transform:scaleY(1)}
-.stage-tag{position:relative;z-index:1;display:block;width:max-content;margin:44px auto 18px;font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--paper);background:var(--ink);padding:5px 12px}
-.stage-tag:first-child{margin-top:0}
-.item{position:relative;display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;min-height:86px;margin:10px 0}
-.item .ring{grid-column:2;grid-row:1;justify-self:center;position:relative;z-index:1;width:40px;height:40px;border-radius:50%;border:2px solid var(--c);background:var(--paper);cursor:pointer;padding:0;opacity:0;transform:scale(.4);transition:transform .45s cubic-bezier(.2,.9,.3,1.3),opacity .45s ease,box-shadow .25s ease}
-.item .ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--c)}
-.item.s-todo .ring::after,.item.s-future .ring::after{background:var(--paper);border:2px solid var(--c);inset:6px}
-.item.s-future .ring{border-style:dashed}
-.item.s-done .ring{background:var(--c)}
-.item.s-alt .ring::after{opacity:.5}
-.item .ring.in{opacity:1;transform:scale(1)}
-.item .ring:hover,.item .ring:focus-visible{box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 22%,transparent);outline:none}
-.item.active .ring::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--c);opacity:0;animation:ping 2.2s ease-out infinite}
+
+/* horizontal roadmap: one spine, rings on it, cards above/below, stage blocks along it */
+.scroll{overflow-x:auto;margin-top:40px;padding:10px 0 24px;-webkit-overflow-scrolling:touch}
+.track{position:relative;display:flex;align-items:stretch;min-width:max-content;padding:0 12px}
+.spine{position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:var(--line);transform:scaleX(0);transform-origin:left center;transition:transform 1.6s ease}
+.track.drawn .spine{transform:scaleX(1)}
+.seg{position:relative;display:flex;flex-direction:column;padding:0 14px}
+.seg-name{position:absolute;top:0;left:14px;font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.6px;color:var(--paper);background:var(--ink);padding:5px 10px;white-space:nowrap}
+.up,.down{height:170px;display:flex;align-items:flex-end;justify-content:center;position:relative}
+.down{align-items:flex-start;padding-top:0}
+.seg-name-wrap{height:0}
+.item{display:flex;flex-direction:column;width:230px;flex:0 0 230px;position:relative}
+.item .slot-up,.item .slot-down{height:170px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:0}
+.item .slot-down{align-items:flex-start;padding-top:0}
+.item .mid{position:relative;height:52px;display:flex;justify-content:center;align-items:center}
+.ring{position:relative;z-index:1;width:40px;height:40px;border-radius:50%;border:2px solid var(--c);background:var(--paper);cursor:pointer;padding:0;opacity:0;transform:scale(.4);transition:transform .45s cubic-bezier(.2,.9,.3,1.3),opacity .45s ease,box-shadow .25s ease}
+.ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--c)}
+.s-todo .ring::after,.s-future .ring::after{background:var(--paper);border:2px solid var(--c);inset:6px}
+.s-future .ring{border-style:dashed}
+.s-done .ring{background:var(--c)}
+.s-done .ring::after{background:var(--paper);inset:12px}
+.s-alt .ring{opacity:.6}
+.ring.in{opacity:1;transform:scale(1)}
+.ring:hover,.ring:focus-visible{box-shadow:0 0 0 5px rgba(100,132,119,.25);outline:none}
+.s-active .ring::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--c);opacity:0;animation:ping 2.2s ease-out infinite}
 @keyframes ping{0%{transform:scale(.7);opacity:.7}100%{transform:scale(1.3);opacity:0}}
-.item .conn{grid-row:1;height:2px;background:var(--c);align-self:center;transform:scaleX(0);transition:transform .6s ease .25s;opacity:.85}
-.item.in-view .conn{transform:scaleX(1)}
-.item.right .conn{grid-column:2;justify-self:start;width:calc(50% - 20px);transform-origin:left;margin-left:20px}
-.item.left .conn{grid-column:2;justify-self:end;width:calc(50% - 20px);transform-origin:right;margin-right:20px}
-.card{grid-row:1;position:relative;background:var(--white);border:1px solid var(--line);border-left:3px solid var(--c);padding:14px 16px;cursor:pointer;color:var(--ink);font:inherit;text-align:left;max-width:320px;opacity:0;transform:translateX(var(--dx,20px));transition:opacity .5s ease .2s,transform .5s ease .2s,box-shadow .25s ease,border-color .25s}
-.item.left .card{grid-column:1;justify-self:end;--dx:-20px}
-.item.right .card{grid-column:3;justify-self:start;--dx:20px}
+.vline{position:absolute;left:50%;width:1px;background:var(--c);margin-left:-.5px;transform:scaleY(0);transition:transform .6s ease .25s;opacity:.8}
+.item.up .vline{bottom:50%;height:calc(100% - 0px)}
+.item.down .vline{top:50%;height:50px}
+.item.in-view .vline{transform:scaleY(1)}
+.item.up .vline{transform-origin:bottom}
+.item.down .vline{transform-origin:top}
+.card{position:relative;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--c);padding:12px 14px;cursor:pointer;color:var(--ink);font:inherit;text-align:left;width:210px;opacity:0;transform:translateY(var(--dy,14px));transition:opacity .5s ease .2s,transform .5s ease .2s,box-shadow .25s ease}
+.item.up .card{--dy:-14px}
+.item.down .card{--dy:14px}
 .card.in{opacity:1;transform:none}
-.card:hover,.card:focus-visible{box-shadow:0 8px 22px rgba(0,0,0,.1);outline:none}
-.card .title{display:block;font-size:17px;line-height:1.35}
+.card:hover,.card:focus-visible{box-shadow:0 8px 22px rgba(32,42,41,.1);outline:none}
+.card .title{display:block;font-size:15px;line-height:1.35}
 .card .st{display:inline-block;margin-top:6px;font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.s-active{--c:var(--ink)}
 .hidden{display:none!important}
-.detail{position:fixed;right:20px;bottom:20px;width:min(380px,calc(100% - 40px));background:var(--white);border:1px solid var(--line);padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.12);transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:10}
+.detail{position:fixed;right:20px;bottom:20px;width:min(380px,calc(100% - 40px));background:var(--white);border:1px solid var(--line);padding:20px;box-shadow:0 14px 40px rgba(32,42,41,.14);transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:10}
 .detail.open{opacity:1;transform:none;pointer-events:auto}
 .detail h3{font-weight:normal;font-size:22px;margin:4px 0 8px}
 .detail p{font-size:15px;margin:0 0 12px}
 .detail .close{position:absolute;right:12px;top:10px;background:none;border:0;font-size:20px;cursor:pointer;color:var(--muted)}
 .note{font:13px Arial,sans-serif;color:var(--muted);margin-top:40px;max-width:720px;border-left:3px solid var(--rust);padding-left:14px}
 .foot{margin-top:40px}
-@media (max-width:640px){
- .spine{left:22px}
- .stage-tag{margin-left:0;margin-right:auto;transform:translateX(0)}
- .item{grid-template-columns:44px 1fr;min-height:0}
- .item .ring{grid-column:1;grid-row:1;justify-self:start;margin-left:2px}
- .item .conn{display:none}
- .item.left .card,.item.right .card{grid-column:2;grid-row:1;justify-self:stretch;max-width:none;--dx:14px}
- .item.left .card,.item.right .card{margin-left:0}
+.scroll-wrap{position:relative;margin-top:40px}
+.scroll-bar{height:2px;background:var(--line);margin:0 12px 0;position:relative}
+.scroll-bar i{position:absolute;left:0;top:0;height:2px;width:30%;background:var(--ink);transition:left .15s linear}
+.scroll-wrap::after{content:"";position:absolute;right:0;top:0;bottom:24px;width:70px;pointer-events:none;background:linear-gradient(to right,rgba(238,234,222,0),var(--paper));transition:opacity .3s}
+.scroll-wrap.at-end::after{opacity:0}
+@media (max-width:700px){.scroll-wrap::after,.scroll-bar{display:none}}
+@media (max-width:700px){
+ .scroll{overflow:visible}
+ .track{flex-direction:column;min-width:0;padding:0 0 0 24px}
+ .spine{left:31px;right:auto;top:0;bottom:0;width:2px;height:auto;margin:0;transform:scaleY(0);transform-origin:top}
+ .track.drawn .spine{transform:scaleY(1)}
+ .seg{padding:0}
+ .seg-name{position:static;align-self:flex-start;margin:28px 0 10px 0}
+ .up,.down{height:auto}
+ .item{flex-direction:row;align-items:center;width:auto;flex:none;gap:12px;margin:8px 0}
+ .item .slot-up,.item .slot-down{display:none}
+ .item .mid{height:auto;width:40px;flex:0 0 40px;margin:0}
+ .item .vline{display:none}
+ .card{width:auto;flex:1;--dy:0px}
+ .item.up .card,.item.down .card{--dy:0px}
 }
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.item .ring,.card{opacity:1;transform:none}.spine{transform:none}.item .conn{transform:none}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.ring,.card{opacity:1;transform:none}.spine{transform:none}.vline{transform:none}}
 </style>
 </head>
 <body>
 <main>
 <p class="kicker">Research atlas · Origin of life</p>
 <h1>Where the work stands</h1>
-<p class="lead">A timeline of the project, top to bottom: what is done, which hypothesis is being tested, what is planned and which laboratory data are still missing. Click a card for details.</p>
-
+<p class="lead">A roadmap read from left to right: what is done, which hypothesis is being tested, what is planned and which laboratory data are still missing. Click a card for details.</p>
 <p class="progress" id="progress"></p>
+
 <div class="legend" role="group" aria-label="Filter by status">
  <button class="chip" data-filter="all" aria-pressed="true">All</button>
  <button class="chip" data-filter="done" aria-pressed="false"><span class="dot" style="background:var(--green)"></span>Done</button>
@@ -86,7 +108,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
  <button class="chip" data-filter="future" aria-pressed="false"><span class="dot" style="border:1.5px dashed var(--muted);background:none"></span>Later</button>
 </div>
 
-<div class="timeline" id="chain"><span class="spine"></span></div>
+<div class="scroll-wrap" id="swrap"><div class="scroll" id="scroll"><div class="track" id="track"><span class="spine"></span></div></div><div class="scroll-bar"><i id="sbar"></i></div></div>
 
 <p class="note">Status reflects work as of late November 2026. Hypothesis wording and the list of candidate sites are working drafts and will change as the work progresses. Simulation results are model output, not laboratory data.</p>
 <p class="foot"><a href="../index.html">← Back to the Independent Research Atlas</a> · <a href="origin-of-life.html">Protocell model page</a></p>
@@ -98,6 +120,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
  <h3 id="dtitle"></h3>
  <p id="dtext"></p>
  <span class="kicker" id="dstatus"></span>
+ <p style="margin-top:12px"><a id="dlink" href="#" hidden>Open page →</a></p>
 </aside>
 
 <script>
@@ -113,7 +136,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
   var STAGES = [
     { name: 'Now', nodes: [
       { t: 'Preprint: methods for the origin-of-life question', s: 'draft', x: 'Methodological paper in draft. Not published. Sources are being checked before any submission.' },
-      { t: 'Protocell model', s: 'done', x: 'Stochastic simulation with 6 conditions, 30 replicates each, 80 generations. Results are descriptive; the statistics need to be redone before any claim is made.' }
+      { t: 'Protocell model', s: 'done', h: 'origin-of-life.html', x: 'Stochastic simulation with 6 conditions, 30 replicates each, 80 generations. Results are descriptive; the statistics need to be redone before any claim is made.' }
     ]},
     { name: 'Hypotheses', nodes: [
       { t: 'Mineral hypothesis (chosen direction)', s: 'active', x: 'Minerals and water as the setting for the first reactions. The exact formulation is still being written.' },
@@ -142,49 +165,61 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
   var doneCount = 0, total = 0;
   STAGES.forEach(function (st) { st.nodes.forEach(function (n) { if (n.s !== 'alt') { total++; if (n.s === 'done') doneCount++; } }); });
   document.getElementById('progress').innerHTML = 'Done: <b>' + doneCount + '</b> of ' + total + ' tracked items · stages: ' + STAGES.length;
-  var chain = document.getElementById('chain');
+  var track = document.getElementById('track');
   var items = [];
+  var doneCount = 0, total = 0;
+  STAGES.forEach(function (st) { st.nodes.forEach(function (n) { if (n.s !== 'alt') { total++; if (n.s === 'done') doneCount++; } }); });
+  document.getElementById('progress').innerHTML = 'Done: <b>' + doneCount + '</b> of ' + total + ' tracked items · ' + STAGES.length + ' stages';
   var k = 0;
   STAGES.forEach(function (st) {
-    var tag = document.createElement('span');
-    tag.className = 'stage-tag';
-    tag.textContent = st.name;
-    chain.appendChild(tag);
+    var seg = document.createElement('div');
+    seg.className = 'seg';
+    var name = document.createElement('span');
+    name.className = 'seg-name';
+    name.textContent = st.name;
+    seg.appendChild(name);
     st.nodes.forEach(function (n) {
       var s = STATUS[n.s];
-      var side = (k % 2 === 0) ? 'left' : 'right';
+      var up = (k % 2 === 0);
       var item = document.createElement('div');
-      item.className = 'item ' + side + ' ' + s.cls + (n.s === 'active' ? ' active' : '');
+      item.className = 'item ' + (up ? 'up' : 'down') + ' ' + s.cls;
       item.dataset.status = n.s;
-      item.style.setProperty('--c', getComputedStyle(document.documentElement).getPropertyValue(
-        { done:'--c-done', draft:'--c-draft', active:'--c-active', todo:'--c-todo', future:'--c-future', alt:'--c-alt' }[n.s]).trim());
-      var ring = document.createElement('button');
-      ring.className = 'ring';
-      ring.setAttribute('aria-label', n.t + ' — ' + s.label);
-      var conn = document.createElement('span');
-      conn.className = 'conn';
       var card = document.createElement('button');
       card.className = 'card';
       card.innerHTML = '<span class="title"></span><span class="st"></span>';
       card.querySelector('.title').textContent = n.t;
       card.querySelector('.st').textContent = s.label;
+      var slot = document.createElement('div');
+      slot.className = up ? 'slot-up' : 'slot-down';
+      slot.appendChild(card);
+      var mid = document.createElement('div');
+      mid.className = 'mid';
+      var ring = document.createElement('button');
+      ring.className = 'ring';
+      ring.setAttribute('aria-label', n.t + ' — ' + s.label);
+      mid.appendChild(ring);
+      var vline = document.createElement('span');
+      vline.className = 'vline';
+      mid.appendChild(vline);
       var go = function () { open(st.name, n, card); };
       ring.addEventListener('click', go);
       card.addEventListener('click', go);
-      item.appendChild(ring); item.appendChild(conn); item.appendChild(card);
-      chain.appendChild(item);
+      if (up) { item.appendChild(slot); item.appendChild(mid); }
+      else { item.appendChild(mid); item.appendChild(slot); }
+      seg.appendChild(item);
       items.push({ item: item, ring: ring, card: card });
       k++;
     });
+    track.appendChild(seg);
   });
 
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function reveal(it) { it.ring.classList.add('in'); it.card.classList.add('in'); it.item.classList.add('in-view'); }
   if (reduce || !('IntersectionObserver' in window)) {
     items.forEach(reveal);
-    chain.classList.add('drawn');
+    track.classList.add('drawn');
   } else {
-    setTimeout(function () { chain.classList.add('drawn'); }, 80);
+    setTimeout(function () { track.classList.add('drawn'); }, 80);
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -197,6 +232,19 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
     items.forEach(function (it) { io.observe(it.item); });
   }
 
+  var scroller = document.getElementById('scroll'), sbar = document.getElementById('sbar'), swrap = document.getElementById('swrap');
+  function syncBar() {
+    var max = scroller.scrollWidth - scroller.clientWidth;
+    var w = scroller.scrollWidth ? (scroller.clientWidth / scroller.scrollWidth) * 100 : 100;
+    sbar.style.width = Math.max(w, 10) + '%';
+    var pos = max > 0 ? scroller.scrollLeft / max : 0;
+    sbar.style.left = (pos * (100 - Math.max(w, 10))) + '%';
+    swrap.classList.toggle('at-end', max <= 0 || scroller.scrollLeft >= max - 4);
+  }
+  scroller.addEventListener('scroll', syncBar, { passive: true });
+  window.addEventListener('resize', syncBar);
+  syncBar();
+
   var panel = document.getElementById('detail');
   var last = null;
   function open(stage, n, btn) {
@@ -204,6 +252,8 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
     document.getElementById('dtitle').textContent = n.t;
     document.getElementById('dtext').textContent = n.x;
     document.getElementById('dstatus').textContent = STATUS[n.s].label;
+    var dl = document.getElementById('dlink');
+    if (n.h) { dl.href = n.h; dl.hidden = false; } else { dl.hidden = true; }
     panel.classList.add('open');
     last = btn;
   }
