@@ -11,13 +11,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#efeadb;
-  --paper2:#e6e0cd;
-  --ink:#1d2624;
-  --muted:#4d5853;
-  --green:#3d6455;
-  --rust:#b4532a;
-  --line:#bfb8a4;
+  --paper:#f3ecdc;
+  --paper2:#e9e1cb;
+  --ink:#15201d;
+  --muted:#45514b;
+  --green:#1b6b5a;
+  --rust:#d4642a;
+  --line:#c9bfa3;
   --white:#faf7ee;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --display:"Fraunces",Georgia,"Times New Roman",serif;
@@ -154,6 +154,17 @@ footer{
 @keyframes breathe{from{transform:scale(.92)}to{transform:scale(1.06)}}
 @media (prefers-reduced-motion: reduce){.project:hover *{animation:none!important}}
 
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.01em;font-style:normal}
+.logo .mark{flex:0 0 auto}
+.logo .word{color:var(--ink)}
+.logo small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--green);border:1px solid var(--green);padding:2px 6px;margin-left:4px}
+.logo span{display:none}
+header{background:var(--ink);border-bottom:none}
+header .logo .word{color:var(--paper)}
+header .logo small{color:#9fd3c1;border-color:#9fd3c1}
+.links a{color:var(--paper)}
+.links a:hover{color:#f0a36b;border-bottom-color:#f0a36b}
+
 @media(max-width:760px){
   body{font-size:17px}
   .hero{grid-template-columns:1fr;padding:64px 0;gap:40px}
@@ -175,7 +186,12 @@ footer{
 <header>
  <div class="wrap">
   <nav>
-   <a class="logo" href="#">Science for Everyone<span>DR / 03</span></a>
+   <a class="logo" href="#"><svg class="mark" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+   <circle cx="17" cy="17" r="15" fill="none" stroke="#1b6b5a" stroke-width="2"/>
+   <path d="M4 17 Q10.5 7 17 17 T30 17" fill="none" stroke="#d4642a" stroke-width="2.2" stroke-linecap="round"/>
+   <circle cx="17" cy="17" r="2.6" fill="#15201d"/>
+  </svg>
+  <span class="word">Science for Everyone</span><small>DR / 03</small></a>
    <div class="links">
     <a href="#research">Research</a>
     <a href="#about">About</a>
