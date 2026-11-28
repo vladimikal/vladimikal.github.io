@@ -4,135 +4,156 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Independent Research Initiative by Vladislav Druzhka.">
-<title>DR / 03 — Independent Research Atlas</title>
+<title>Vladislav Druzhka — Independent Research</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --paper:#eeeade;
-  --paper2:#e4dfd1;
-  --ink:#202a29;
-  --muted:#69716a;
-  --green:#648477;
-  --rust:#ad654a;
-  --line:#c9c4b5;
-  --white:#f8f6ef;
+:root{
+  --paper:#efeadb;
+  --paper2:#e6e0cd;
+  --ink:#1d2624;
+  --muted:#4d5853;
+  --green:#3d6455;
+  --rust:#b4532a;
+  --line:#bfb8a4;
+  --white:#faf7ee;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--paper);color:var(--ink);
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:var(--serif);font-size:18px;line-height:1.6;
+  font-optical-sizing:auto;
 }
-a{color:inherit;text-decoration:none}
+a{color:inherit;text-decoration:none;transition:color .2s}
 a:hover{color:var(--rust)}
-button,a{transition:.2s}
 .wrap{width:min(1160px,90%);margin:auto}
-header{border-bottom:1px solid var(--line)}
+
+/* signature: a small ring, echoing the PaleoSound figure */
+.ring{
+  display:inline-block;width:11px;height:11px;margin-right:10px;
+  border:1.5px solid var(--rust);border-radius:50%;vertical-align:middle;
+  position:relative;top:-1px;
+}
+
+header{border-bottom:1px solid var(--ink)}
 nav{
-  min-height:76px;display:flex;align-items:center;
+  min-height:82px;display:flex;align-items:center;
   justify-content:space-between;gap:24px;
 }
-.logo{font-family:Arial,sans-serif;font-weight:800;letter-spacing:2px}
-.logo span{color:var(--rust)}
-.links{display:flex;gap:25px;font:12px Arial,sans-serif;
-text-transform:uppercase;letter-spacing:1px}
+.logo{font-family:var(--display);font-style:italic;font-size:26px;letter-spacing:-.01em}
+.logo span{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--rust);margin-left:8px;letter-spacing:.06em}
+.links{display:flex;gap:26px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.09em}
+.links a{border-bottom:1px solid transparent;padding-bottom:3px}
+.links a:hover{border-bottom-color:var(--rust)}
+
 .hero{
-  padding:105px 0 90px;display:grid;
-  grid-template-columns:1.15fr .85fr;gap:50px;
-  align-items:center;min-height:590px;
+  padding:100px 0 90px;display:grid;
+  grid-template-columns:1.15fr .85fr;gap:60px;
+  align-items:center;min-height:600px;
 }
 .kicker,.number,.small-label{
-  font:11px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:2px;color:var(--green);
+  font:500 11px var(--mono);text-transform:uppercase;
+  letter-spacing:.09em;color:var(--green);
 }
+h1,h2,h3{font-family:var(--display);font-weight:300;font-variation-settings:"opsz" 144}
 h1{
-  font-size:clamp(54px,8vw,100px);line-height:.96;
-  font-weight:normal;letter-spacing:-4px;margin:25px 0;
+  font-size:clamp(56px,8.4vw,116px);line-height:.94;
+  letter-spacing:-.035em;margin:28px 0 30px;
 }
-h1 em{color:var(--green);font-weight:normal}
-.lead{font-size:20px;line-height:1.65;color:var(--muted);max-width:570px}
-.byline{font:12px Arial,sans-serif;letter-spacing:1px;
-text-transform:uppercase;margin-top:35px}
+h1 em{color:var(--rust);font-style:italic;font-weight:300}
+.lead{font-size:21px;line-height:1.55;color:var(--muted);max-width:580px}
+.byline{
+  font:500 12px var(--mono);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:38px;line-height:1.8;
+  border-left:2px solid var(--rust);padding-left:14px;
+}
+
 .hero-art{
-  background:var(--paper2);border:1px solid var(--line);
-  padding:18px;position:relative;
+  background:var(--paper2);border:1px solid var(--ink);
+  padding:14px;position:relative;
 }
 .hero-art svg{display:block;width:100%;height:auto}
 .art-caption{
   display:flex;justify-content:space-between;gap:10px;
-  font:10px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:1px;color:var(--muted);padding-top:12px;
+  font:400 10px var(--mono);text-transform:uppercase;
+  letter-spacing:.08em;color:var(--muted);padding-top:12px;
 }
-.section{padding:85px 0;border-top:1px solid var(--line)}
+
+.section{padding:90px 0;border-top:3px double var(--line)}
 .section-head{
   display:flex;justify-content:space-between;
-  align-items:end;gap:30px;margin-bottom:40px;
+  align-items:end;gap:30px;margin-bottom:46px;
 }
-h2{font-size:clamp(34px,5vw,55px);font-weight:normal;
-letter-spacing:-1.5px;margin:12px 0}
-.intro{max-width:440px;color:var(--muted);line-height:1.7}
-.projects{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-}
+h2{font-size:clamp(40px,5.4vw,68px);font-weight:300;letter-spacing:-.03em;margin:14px 0 0;line-height:1}
+.intro{max-width:420px;color:var(--muted);line-height:1.6;font-size:18px;font-style:italic}
+
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .project{
-  border:1px solid var(--line);padding:22px;
-  background:rgba(255,255,255,.17);
+  border-top:2px solid var(--ink);padding:22px 0 0;
+  background:none;
 }
 .project-art{
-  height:190px;background:var(--paper2);
+  height:190px;background:var(--paper2);border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:24px;overflow:hidden;
+  margin-bottom:22px;overflow:hidden;
 }
 .project-art svg{width:100%;height:100%}
-.project h3{font-size:25px;font-weight:normal;margin:12px 0}
-.project p{font-size:15px;line-height:1.7;color:var(--muted)}
+.project h3{font-size:30px;font-weight:300;margin:12px 0 10px;line-height:1.1;letter-spacing:-.01em}
+.project p{font-size:16px;line-height:1.6;color:var(--muted)}
 .project .tag{
-  font:10px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:1.5px;color:var(--rust)
+  font:500 10px var(--mono);text-transform:uppercase;
+  letter-spacing:.09em;color:var(--rust)
 }
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:70px;
-}
-.about-text{font-size:19px;line-height:1.8;color:var(--muted)}
-.manifesto{
-  font-size:clamp(27px,4vw,43px);line-height:1.3;
-}
-.manifesto em{color:var(--green)}
-.resources{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:15px;
-}
-.resource{
-  border-top:1px solid var(--line);padding:22px 0;
-}
-.resource a{font-size:21px}
-.resource p{font-size:14px;color:var(--muted)}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.about-text{font-size:20px;line-height:1.7;color:var(--muted)}
+.manifesto{font-family:var(--display);font-weight:300;font-size:clamp(30px,4vw,46px);line-height:1.2;letter-spacing:-.02em}
+.manifesto em{color:var(--rust);font-style:italic}
+
+.resources{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px}
+.resource{border-top:1px solid var(--ink);padding:22px 0}
+.resource a{font-family:var(--display);font-size:24px;font-weight:300;letter-spacing:-.01em}
+.resource p{font-size:15px;color:var(--muted)}
+
 .support{
   background:var(--ink);color:var(--white);
-  padding:65px;margin-top:20px;
+  padding:70px;margin-top:20px;
 }
-.support .small-label{color:#a8c0b1}
-.support p{color:#c3c8be;max-width:600px;line-height:1.8}
+.support .small-label{color:#a9c4b4}
+.support h2{color:var(--white)}
+.support p{color:#cfd3c9;max-width:600px;line-height:1.7;font-size:19px}
 .support a{
-  display:inline-block;border:1px solid #a8c0b1;
-  padding:13px 20px;margin-top:15px;
-  font:11px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:1.5px;color:var(--white)
+  display:inline-block;border:1px solid var(--rust);
+  padding:13px 20px;margin-top:18px;
+  font:500 11px var(--mono);text-transform:uppercase;
+  letter-spacing:.1em;color:var(--white);
 }
+.support a:hover{background:var(--rust);color:var(--white)}
+
 footer{
-  padding:35px 0;display:flex;justify-content:space-between;
-  gap:20px;color:var(--muted);font:11px Arial,sans-serif;
-  text-transform:uppercase;letter-spacing:1px;
+  padding:36px 0;display:flex;justify-content:space-between;
+  gap:20px;color:var(--muted);font:400 11px var(--mono);
+  text-transform:uppercase;letter-spacing:.07em;border-top:1px solid var(--line);
 }
+
 @media(max-width:760px){
-  .hero{grid-template-columns:1fr;padding:65px 0}
+  body{font-size:17px}
+  .hero{grid-template-columns:1fr;padding:64px 0;gap:40px}
   .hero-art{max-width:520px}
   .projects{grid-template-columns:1fr}
   .project-art{height:220px}
   .about-grid{grid-template-columns:1fr;gap:15px}
   .section-head{display:block}
-  .support{padding:35px 25px}
-  .links{gap:12px;font-size:10px}
-  h1{letter-spacing:-2px}
+  .section{padding:64px 0}
+  .support{padding:36px 26px}
+  .links{gap:14px;font-size:10px}
+  h1{letter-spacing:-.025em}
 }
 </style>
 </head>
@@ -142,7 +163,7 @@ footer{
 <header>
  <div class="wrap">
   <nav>
-   <a class="logo" href="#">DR <span>/</span> 03</a>
+   <a class="logo" href="#">Druzhka<span>DR / 03</span></a>
    <div class="links">
     <a href="#research">Research</a>
     <a href="#about">About</a>
@@ -157,7 +178,7 @@ footer{
 
 <section class="wrap hero">
  <div>
-  <div class="kicker">Independent Research Atlas · 2026</div>
+  <div class="kicker"><span class="ring"></span>Independent Research Atlas · 2026</div>
   <h1>Science is<br>the study of<br><em>relations.</em></h1>
   <p class="lead">
    An independent research initiative exploring living
@@ -203,7 +224,7 @@ footer{
  <div class="wrap">
   <div class="section-head">
    <div>
-    <div class="kicker">Research programme</div>
+    <div class="kicker"><span class="ring"></span>Research programme</div>
     <h2>Three directions</h2>
    </div>
    <p class="intro">
