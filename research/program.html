@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Origin of life research programme: a geochemical scenario and a computational protocell model, with completed, ongoing and planned stages.">
+<title>Origin of Life Programme — DR / 04</title>
+<style>
+:root{--paper:#dbe8e2;--ink:#15201d;--muted:#69716a;--green:#0f5566;--rust:#c4621c;--line:#a3bab0;--paper2:#c9dcd3}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0e1d22;--ink:#e3efe9;--muted:#a9bcc0;--green:#7fc1d1;--rust:#f0a36b;--line:#2c4a52;--paper2:#15292f}}
+:root[data-theme="dark"]{--paper:#0e1d22;--ink:#e3efe9;--muted:#a9bcc0;--green:#7fc1d1;--rust:#f0a36b;--line:#2c4a52;--paper2:#15292f}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}
+main{width:min(820px,90%);margin:0 auto;padding:60px 0 80px}
+a{color:var(--green)}
+.small{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+.kicker{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
+h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margin:14px 0}
+h2{font-weight:normal;font-size:26px;margin:44px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font:13px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);font-weight:normal;margin:26px 0 8px}
+.lead{font-size:19px;color:var(--muted)}
+p,li{font-size:17px}
+li{margin-bottom:8px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:18px 0;font:14px Arial,sans-serif}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--green);font-weight:normal;text-transform:uppercase;font-size:11px;letter-spacing:1px}
+.tag{display:inline-block;font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border:1px solid var(--line);border-radius:2px;white-space:nowrap}
+.t-done{color:var(--green);border-color:var(--green)}
+.t-active{color:var(--rust);border-color:var(--rust)}
+.t-plan{color:var(--muted)}
+.t-alt{color:var(--muted);font-style:italic}
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.track{border-top:2px solid var(--green);padding-top:10px}
+.track h3{margin-top:0}
+@media (max-width:640px){.tracks{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<p class="small">DR / 04 — Independent Research Initiative</p>
+<p class="small"><a href="../index.html">Home</a> · <a href="origin-of-life.html">Protocell Dynamics</a> · <a href="atlas.html">Research atlas</a></p>
+<p class="kicker">RESEARCH AREA 01 · ORIGIN OF LIFE</p>
+<h1>Research programme</h1>
+<p class="lead">Two directions on one question: under what conditions could living chemistry begin?</p>
+
+<h2>The question</h2>
+<p>How could chemistry on early Earth move from simple molecules to systems that hold reactions, copy information and divide? This programme approaches the question from two sides. One starts from the geochemical setting, the other from a computational model of compartments. The aim is to say what has been shown, what is being tested and what is still missing, without treating any part as settled.</p>
+
+<h2>Two directions</h2>
+<div class="tracks">
+  <div class="track">
+    <h3>A · Geochemical scenario</h3>
+    <p>Mineral-rich water as the setting for the first reactions. The working case is evaporating alkaline lakes, which concentrate minerals and chemicals. Hydrothermal vents are kept as a comparison setting.</p>
+    <p>Open questions: water chemistry in lake-like settings, mineral energy sources such as serpentinisation, and whether short peptides form and persist under those conditions.</p>
+  </div>
+  <div class="track">
+    <h3>B · Computational protocell model</h3>
+    <p>A stochastic model of compartment populations with internal reaction networks, division, inheritance and a shared resource pool. It explores which conditions let compartments persist and grow.</p>
+    <p>Open questions: the statistics need to be redone, the rules need auditing, and the assumed rate constants need linking to measured values where they exist.</p>
+  </div>
+</div>
+<p>The two directions meet at one point: the model needs chemistry that the geochemical scenario can supply, and the geochemistry needs a way to test whether compartments can hold that chemistry.</p>
+
+<h2>Stages</h2>
+<p>Status reflects the current state of each stage. Nothing listed as planned has laboratory data behind it yet.</p>
+<div class="table-wrap">
+<table>
+<tr><th>Stage</th><th>Track</th><th>Status</th><th>Notes</th></tr>
+<tr><td>Protocell model: simulation built</td><td>B</td><td><span class="tag t-done">Done</span></td><td>Five named conditions and a nine-setting parameter grid, 30 replicates each, 80 generations. Results are descriptive. Statistics need to be redone before any claim is made.</td></tr>
+<tr><td>Coacervate uptake illustration</td><td>B</td><td><span class="tag t-done">Done</span></td><td>Minimal permeability and partition model, based on Oparin's coacervate idea. Illustrative only; not calibrated to experiment.</td></tr>
+<tr><td>Model audit (division, partitioning, conservation)</td><td>B</td><td><span class="tag t-active">In progress</span></td><td>Parts of the code need review, including two unused parameters and minimum copy-number rules.</td></tr>
+<tr><td>Statistical re-analysis</td><td>B</td><td><span class="tag t-active">In progress</span></td><td>Current p-values are not reported as evidence. Re-analysis with tie-corrected tests and multiple-comparison adjustment is pending.</td></tr>
+<tr><td>Mineral hypothesis: formulation</td><td>A</td><td><span class="tag t-active">In progress</span></td><td>Minerals and water as the setting for the first reactions. Exact wording still being written.</td></tr>
+<tr><td>Lake version and source checks</td><td>A</td><td><span class="tag t-active">In progress</span></td><td>Evaporating lake systems. Sources are being checked before they are cited on the site.</td></tr>
+<tr><td>Alkaline lake water chemistry</td><td>A</td><td><span class="tag t-plan">Planned</span></td><td>Water chemistry, pH and sediment minerals. Full ion data is still missing for the example lake.</td></tr>
+<tr><td>Serpentinisation as an energy source</td><td>A</td><td><span class="tag t-plan">Planned</span></td><td>Reactions of water with ultramafic rock that produce hydrogen and alkaline fluids.</td></tr>
+<tr><td>Hydrothermal vents as comparison</td><td>A</td><td><span class="tag t-alt">Alternative</span></td><td>Kept for comparison, for example the Lost City vent field.</td></tr>
+<tr><td>Peptide yield in lake-like water</td><td>A</td><td><span class="tag t-plan">Needs lab data</span></td><td>Concentrations, time, temperature and catalysts, under controlled conditions. No laboratory data yet.</td></tr>
+<tr><td>Link model constants to measured values</td><td>B</td><td><span class="tag t-plan">Needs lab data</span></td><td>Replace assumed rate constants with measured ones where they exist.</td></tr>
+<tr><td>Protocell membranes</td><td>A + B</td><td><span class="tag t-plan">Planned</span></td><td>Whether compartments form and hold the chemistry from the model. Not yet tested.</td></tr>
+<tr><td>Preprint on methods</td><td>A + B</td><td><span class="tag t-active">In progress</span></td><td>In draft. Not published. To be finished after the sources and statistics are checked.</td></tr>
+<tr><td>Paper on the model</td><td>B</td><td><span class="tag t-plan">Planned</span></td><td>Full description of the model, ablations and corrected statistics.</td></tr>
+<tr><td>Paper on experiments</td><td>A</td><td><span class="tag t-plan">Planned</span></td><td>Depends on the laboratory data above.</td></tr>
+</table>
+</div>
+
+<h2>What is not yet claimed</h2>
+<ul>
+<li>The protocell model is a simplified computational framework. It does not show a historical pathway for the origin of life.</li>
+<li>The coacervate illustration is not evidence that coacervates played a role in the origin of life.</li>
+<li>No laboratory experiment in this programme has been run yet.</li>
+<li>The geochemical scenario is a hypothesis, not a result.</li>
+</ul>
+
+<h2>Where to follow it</h2>
+<ul>
+<li><a href="origin-of-life.html">Protocell Dynamics: model description, parameters and results</a></li>
+<li><a href="atlas.html">Research atlas: the same stages as an interactive roadmap</a></li>
+</ul>
+<p class="small">Return to the Independent Research Initiative</p>
+</main>
+</body>
+</html>

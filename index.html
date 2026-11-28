@@ -4,136 +4,183 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Independent Research Initiative by Vladislav Druzhka.">
-<title>DR / 03 — Independent Research Atlas</title>
+<title>Science for Everyone — Vladislav Druzhka</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --paper:#eeeade;
-  --paper2:#e4dfd1;
-  --ink:#202a29;
-  --muted:#69716a;
-  --green:#648477;
-  --rust:#ad654a;
-  --line:#c9c4b5;
-  --white:#f8f6ef;
+:root{
+  --paper:#dbe8e2;
+  --paper2:#c9dcd3;
+  --ink:#15201d;
+  --muted:#45514b;
+  --green:#0f5566;
+  --rust:#e07a2e;
+  --line:#a3bab0;
+  --white:#faf7ee;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--paper);color:var(--ink);
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:var(--serif);font-size:18px;line-height:1.6;
+  font-optical-sizing:auto;
 }
-a{color:inherit;text-decoration:none}
+a{color:inherit;text-decoration:none;transition:color .2s}
 a:hover{color:var(--rust)}
-button,a{transition:.2s}
 .wrap{width:min(1160px,90%);margin:auto}
-header{border-bottom:1px solid var(--line)}
+
+/* signature: a small ring, echoing the PaleoSound figure */
+.ring{
+  display:inline-block;width:11px;height:11px;margin-right:10px;
+  border:1.5px solid var(--rust);border-radius:50%;vertical-align:middle;
+  position:relative;top:-1px;
+}
+
+header{border-bottom:1px solid var(--ink)}
 nav{
-  min-height:76px;display:flex;align-items:center;
+  min-height:82px;display:flex;align-items:center;
   justify-content:space-between;gap:24px;
 }
-.logo{font-family:Arial,sans-serif;font-weight:800;letter-spacing:2px}
-.logo span{color:var(--rust)}
-.links{display:flex;gap:25px;font:12px Arial,sans-serif;
-text-transform:uppercase;letter-spacing:1px}
+.logo{font-family:var(--display);font-style:italic;font-size:26px;letter-spacing:-.01em}
+.logo span{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--rust);margin-left:8px;letter-spacing:.06em}
+.links{display:flex;gap:26px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.09em}
+.links a{border-bottom:1px solid transparent;padding-bottom:3px}
+.links a:hover{border-bottom-color:var(--rust)}
+
 .hero{
-  padding:105px 0 90px;display:grid;
-  grid-template-columns:1.15fr .85fr;gap:50px;
-  align-items:center;min-height:590px;
+  padding:100px 0 90px;display:grid;
+  grid-template-columns:1.15fr .85fr;gap:60px;
+  align-items:center;min-height:600px;
 }
 .kicker,.number,.small-label{
-  font:11px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:2px;color:var(--green);
+  font:500 11px var(--mono);text-transform:uppercase;
+  letter-spacing:.09em;color:var(--green);
 }
+h1,h2,h3{font-family:var(--display);font-weight:300;font-variation-settings:"opsz" 144}
 h1{
-  font-size:clamp(54px,8vw,100px);line-height:.96;
-  font-weight:normal;letter-spacing:-4px;margin:25px 0;
+  font-size:clamp(56px,8.4vw,116px);line-height:.94;
+  letter-spacing:-.035em;margin:28px 0 30px;
 }
-h1 em{color:var(--green);font-weight:normal}
-.lead{font-size:20px;line-height:1.65;color:var(--muted);max-width:570px}
-.byline{font:12px Arial,sans-serif;letter-spacing:1px;
-text-transform:uppercase;margin-top:35px}
+h1 em{color:var(--rust);font-style:italic;font-weight:300}
+.lead{font-size:21px;line-height:1.55;color:var(--muted);max-width:580px}
+.byline{
+  font:500 12px var(--mono);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:38px;line-height:1.8;
+  border-left:2px solid var(--rust);padding-left:14px;
+}
+
 .hero-art{
-  background:var(--paper2);border:1px solid var(--line);
-  padding:18px;position:relative;
+  background:none;border:1px solid var(--ink);
+  padding:14px;position:relative;
 }
 .hero-art svg{display:block;width:100%;height:auto}
 .art-caption{
   display:flex;justify-content:space-between;gap:10px;
-  font:10px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:1px;color:var(--muted);padding-top:12px;
+  font:400 10px var(--mono);text-transform:uppercase;
+  letter-spacing:.08em;color:var(--muted);padding-top:12px;
 }
-.section{padding:85px 0;border-top:1px solid var(--line)}
+
+.section{padding:90px 0;border-top:3px double var(--line)}
 .section-head{
   display:flex;justify-content:space-between;
-  align-items:end;gap:30px;margin-bottom:40px;
+  align-items:end;gap:30px;margin-bottom:46px;
 }
-h2{font-size:clamp(34px,5vw,55px);font-weight:normal;
-letter-spacing:-1.5px;margin:12px 0}
-.intro{max-width:440px;color:var(--muted);line-height:1.7}
-.projects{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-}
+h2{font-size:clamp(40px,5.4vw,68px);font-weight:300;letter-spacing:-.03em;margin:14px 0 0;line-height:1}
+.intro{max-width:420px;color:var(--muted);line-height:1.6;font-size:18px;font-style:italic}
+
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .project{
-  border:1px solid var(--line);padding:22px;
-  background:rgba(255,255,255,.17);
+  border-top:2px solid var(--ink);padding:22px 0 0;
+  background:none;
 }
 .project-art{
-  height:190px;background:var(--paper2);
+  height:190px;background:none;border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:24px;overflow:hidden;
+  margin-bottom:22px;overflow:hidden;
 }
 .project-art svg{width:100%;height:100%}
-.project h3{font-size:25px;font-weight:normal;margin:12px 0}
-.project p{font-size:15px;line-height:1.7;color:var(--muted)}
+.project h3{font-size:30px;font-weight:300;margin:12px 0 10px;line-height:1.1;letter-spacing:-.01em}
+.project p{font-size:16px;line-height:1.6;color:var(--muted)}
 .project .tag{
-  font:10px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:1.5px;color:var(--rust)
+  font:500 10px var(--mono);text-transform:uppercase;
+  letter-spacing:.09em;color:var(--rust)
 }
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:70px;
-}
-.about-text{font-size:19px;line-height:1.8;color:var(--muted)}
-.manifesto{
-  font-size:clamp(27px,4vw,43px);line-height:1.3;
-}
-.manifesto em{color:var(--green)}
-.resources{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:15px;
-}
-.resource{
-  border-top:1px solid var(--line);padding:22px 0;
-}
-.resource a{font-size:21px}
-.resource p{font-size:14px;color:var(--muted)}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.about-text{font-size:20px;line-height:1.7;color:var(--muted)}
+.manifesto{font-family:var(--display);font-weight:300;font-size:clamp(30px,4vw,46px);line-height:1.2;letter-spacing:-.02em}
+.manifesto em{color:var(--rust);font-style:italic}
+
+.resources{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px}
+.resource{border-top:1px solid var(--ink);padding:22px 0}
+.resource a{font-family:var(--display);font-size:24px;font-weight:300;letter-spacing:-.01em}
+.resource p{font-size:15px;color:var(--muted)}
+
 .support{
   background:var(--ink);color:var(--white);
-  padding:65px;margin-top:20px;
+  padding:70px;margin-top:20px;
 }
-.support .small-label{color:#a8c0b1}
-.support p{color:#c3c8be;max-width:600px;line-height:1.8}
+.support .small-label{color:#a9c4b4}
+.support h2{color:var(--white)}
+.support p{color:#cfd3c9;max-width:600px;line-height:1.7;font-size:19px}
 .support a{
-  display:inline-block;border:1px solid #a8c0b1;
-  padding:13px 20px;margin-top:15px;
-  font:11px Arial,sans-serif;text-transform:uppercase;
-  letter-spacing:1.5px;color:var(--white)
+  display:inline-block;border:1px solid var(--rust);
+  padding:13px 20px;margin-top:18px;
+  font:500 11px var(--mono);text-transform:uppercase;
+  letter-spacing:.1em;color:var(--white);
 }
+.support a:hover{background:var(--rust);color:var(--white)}
+
 footer{
-  padding:35px 0;display:flex;justify-content:space-between;
-  gap:20px;color:var(--muted);font:11px Arial,sans-serif;
-  text-transform:uppercase;letter-spacing:1px;
+  padding:36px 0;display:flex;justify-content:space-between;
+  gap:20px;color:var(--muted);font:400 11px var(--mono);
+  text-transform:uppercase;letter-spacing:.07em;border-top:1px solid var(--line);
 }
+
+/* hover motion on research cards */
+.orbit,.drift,.wave,.pulse{transform-box:fill-box;transform-origin:center}
+.project:hover .orbit{animation:spin 9s linear infinite}
+.project:hover .drift{animation:drift 3.6s ease-in-out infinite alternate}
+.project:hover .wave{animation:shift 2.6s ease-in-out infinite alternate}
+.project:hover .pulse{animation:breathe 1.8s ease-in-out infinite alternate}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{from{transform:translate(-4px,2px)}to{transform:translate(5px,-3px)}}
+@keyframes shift{from{transform:translateX(-10px)}to{transform:translateX(10px)}}
+@keyframes breathe{from{transform:scale(.92)}to{transform:scale(1.06)}}
+@media (prefers-reduced-motion: reduce){.project:hover *{animation:none!important}}
+
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.01em;font-style:normal}
+.logo .mark{flex:0 0 auto}
+.logo .word{color:var(--ink)}
+.logo small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--green);border:1px solid var(--green);padding:2px 6px;margin-left:4px}
+.logo span{display:none}
+header{background:var(--green);border-bottom:4px solid var(--rust)}
+header .logo .word{color:var(--paper)}
+header .logo small{color:#f4eddc;border-color:#f4eddc}
+.links a{color:var(--paper)}
+.links a:hover{color:#ffc58a;border-bottom-color:#ffc58a}
+
 @media(max-width:760px){
-  .hero{grid-template-columns:1fr;padding:65px 0}
+  body{font-size:17px}
+  .hero{grid-template-columns:1fr;padding:64px 0;gap:40px}
   .hero-art{max-width:520px}
   .projects{grid-template-columns:1fr}
   .project-art{height:220px}
   .about-grid{grid-template-columns:1fr;gap:15px}
   .section-head{display:block}
-  .support{padding:35px 25px}
-  .links{gap:12px;font-size:10px}
-  h1{letter-spacing:-2px}
+  .section{padding:64px 0}
+  .support{padding:36px 26px}
+  .links{gap:14px;font-size:10px}
+  h1{letter-spacing:-.025em}
 }
+.hero-art .node circle{transition:r .25s ease;cursor:pointer}
+.hero-art .node:hover circle,.hero-art .node:focus circle{r:9}
+.hero-art .node:focus{outline:none}
 </style>
 </head>
 
@@ -142,7 +189,12 @@ footer{
 <header>
  <div class="wrap">
   <nav>
-   <a class="logo" href="#">DR <span>/</span> 03</a>
+   <a class="logo" href="#"><svg class="mark" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+   <circle cx="17" cy="17" r="15" fill="none" stroke="#f4eddc" stroke-width="2"/>
+   <path d="M4 17 Q10.5 7 17 17 T30 17" fill="none" stroke="#e07a2e" stroke-width="2.2" stroke-linecap="round"/>
+   <circle cx="17" cy="17" r="2.6" fill="#f4eddc"/>
+  </svg>
+  <span class="word">Science for Everyone</span><small>DR / 03</small></a>
    <div class="links">
     <a href="#research">Research</a>
     <a href="#about">About</a>
@@ -157,7 +209,7 @@ footer{
 
 <section class="wrap hero">
  <div>
-  <div class="kicker">Independent Research Atlas · 2026</div>
+  <div class="kicker"><span class="ring"></span>Open, accessible science · 2026</div>
   <h1>Science is<br>the study of<br><em>relations.</em></h1>
   <p class="lead">
    An independent research initiative exploring living
@@ -172,22 +224,34 @@ footer{
  </div>
 
  <div class="hero-art">
-  <svg viewBox="0 0 480 430" xmlns="http://www.w3.org/2000/svg">
-   <rect width="480" height="430" fill="#e4dfd1"/>
-   <g fill="none" stroke="#648477" stroke-width="1.2">
+  <svg viewBox="0 0 480 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three research directions connected on a rotating sphere">
+   <rect width="480" height="430" fill="#d3e4dc"/>
+   <g fill="none" stroke="#0f5566" stroke-width="1.2">
     <circle cx="240" cy="205" r="145"/>
     <circle cx="240" cy="205" r="110" stroke-dasharray="3 7"/>
     <ellipse cx="240" cy="205" rx="145" ry="55"/>
-    <ellipse cx="240" cy="205" rx="55" ry="145"/>
-    <path d="M95 205H385M240 60V350"/>
+    <ellipse cx="240" cy="205" rx="55" ry="145">
+     <animate attributeName="rx" values="145;0;145" dur="18s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </ellipse>
+    <ellipse cx="240" cy="205" rx="110" ry="145">
+     <animate attributeName="rx" values="110;-110;110" dur="18s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </ellipse>
+    <path d="M95 205H385"/>
    </g>
-   <g fill="none" stroke="#ad654a" stroke-width="2">
-    <path d="M110 280 Q175 80 240 205 T370 125"/>
-    <circle cx="110" cy="280" r="5" fill="#ad654a"/>
-    <circle cx="240" cy="205" r="6" fill="#ad654a"/>
-    <circle cx="370" cy="125" r="5" fill="#ad654a"/>
+   <path d="M110 280 Q175 80 240 205 T370 125" fill="none" stroke="#c4621c" stroke-width="2"/>
+   <g class="node" tabindex="0">
+    <title>Protocell Dynamics: computational model</title>
+    <circle cx="110" cy="280" r="5" fill="#c4621c"/>
    </g>
-   <g fill="#202a29" font-family="Arial" font-size="10">
+   <g class="node" tabindex="0">
+    <title>Quantum Measurement: conceptual research</title>
+    <circle cx="240" cy="205" r="6" fill="#c4621c"/>
+   </g>
+   <g class="node" tabindex="0">
+    <title>PaleoSound: acoustic reconstruction</title>
+    <circle cx="370" cy="125" r="5" fill="#c4621c"/>
+   </g>
+   <g fill="#15201d" font-family="Arial" font-size="10">
     <text x="28" y="32">FIG. 01 — RELATIONAL SYSTEMS</text>
     <text x="25" y="405">OBSERVATION / STRUCTURE / CHANGE</text>
     <text x="350" y="390">DR—03</text>
@@ -203,7 +267,7 @@ footer{
  <div class="wrap">
   <div class="section-head">
    <div>
-    <div class="kicker">Research programme</div>
+    <div class="kicker"><span class="ring"></span>Research programme</div>
     <h2>Three directions</h2>
    </div>
    <p class="intro">
@@ -217,21 +281,7 @@ footer{
 
    <article class="project">
     <div class="project-art">
-     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="#648477">
-       <circle cx="150" cy="95" r="65" stroke-width="3"/>
-       <circle cx="150" cy="95" r="54" stroke-width="1" stroke-dasharray="3 4"/>
-       <path d="M90 70Q150 25 210 70M90 120Q150 165 210 120"/>
-       <path d="M110 80l18 12-15 16 22 10M185 70l-13 20 18 10"/>
-      </g>
-      <g fill="#ad654a">
-       <circle cx="125" cy="80" r="5"/><circle cx="180" cy="115" r="4"/>
-       <circle cx="160" cy="55" r="3"/>
-      </g>
-      <g fill="#202a29" font-family="Arial" font-size="9">
-       <text x="12" y="18">MEMBRANE SYSTEM / SCHEMATIC</text>
-      </g>
-     </svg>
+     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#0f5566" stroke-width="1.4"><circle cx="120" cy="98" r="52"/><circle cx="178" cy="84" r="34"/><circle cx="196" cy="128" r="26"/><circle class="orbit" cx="120" cy="98" r="44" stroke-dasharray="2 4" stroke-width=".9"/><path d="M70 150 Q120 176 170 150" stroke="#c4621c" stroke-width="1.2"/></g><g class="drift" fill="#c4621c"><circle cx="108" cy="88" r="3.5"/><circle cx="127" cy="112" r="2.5"/><circle cx="176" cy="80" r="3"/><circle cx="190" cy="124" r="2.8"/><circle cx="162" cy="100" r="2"/><circle cx="144" cy="78" r="2.2"/></g><text x="12" y="18" font-family="IBM Plex Mono,monospace" font-size="9" fill="#15201d" letter-spacing="1">PROTOCELL · N=6 · G80</text></svg>
     </div>
     <div class="tag">01 / Origin of Life</div>
     <h3><a href="research/origin-of-life.html">Protocell Dynamics</a></h3>
@@ -245,18 +295,7 @@ footer{
 
    <article class="project">
     <div class="project-art">
-     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="#648477" stroke-width="1.4">
-       <path d="M12 95 Q45 10 78 95 T144 95 T210 95 T276 95"/>
-       <path d="M12 95 Q45 180 78 95 T144 95 T210 95 T276 95" opacity=".55"/>
-       <path d="M12 95H288" stroke-dasharray="3 5"/>
-       <circle cx="150" cy="95" r="5" fill="#ad654a" stroke="#ad654a"/>
-      </g>
-      <g fill="#202a29" font-family="Arial" font-size="9">
-       <text x="12" y="18">INTERFERENCE / SCHEMATIC</text>
-       <text x="225" y="177">x →</text>
-      </g>
-     </svg>
+     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg"><g class="wave" fill="none" stroke-width="1.3"><polyline points="0,95.0 4,99.3 8,103.6 12,107.5 16,111.1 20,114.3 24,117.0 28,119.0 32,120.3 36,120.9 40,120.9 44,120.0 48,118.5 52,116.3 56,113.6 60,110.3 64,106.6 68,102.5 72,98.3 76,93.9 80,89.6 84,85.4 88,81.5 92,78.0 96,75.0 100,72.5 104,70.6 108,69.5 112,69.0 116,69.3 120,70.3 124,72.0 128,74.3 132,77.2 136,80.6 140,84.4 144,88.5 148,92.8 152,97.2 156,101.5 160,105.6 164,109.4 168,112.8 172,115.7 176,118.0 180,119.7 184,120.7 188,121.0 192,120.5 196,119.4 200,117.5 204,115.0 208,112.0 212,108.5 216,104.6 220,100.4 224,96.1 228,91.7 232,87.5 236,83.4 240,79.7 244,76.4 248,73.7 252,71.5 256,70.0 260,69.1 264,69.1 268,69.7 272,71.0 276,73.0 280,75.7 284,78.9 288,82.5 292,86.4 296,90.7 300,95.0" stroke="#0f5566" opacity="1"/><polyline points="0,95.0 4,90.7 8,86.4 12,82.5 16,78.9 20,75.7 24,73.0 28,71.0 32,69.7 36,69.1 40,69.1 44,70.0 48,71.5 52,73.7 56,76.4 60,79.7 64,83.4 68,87.5 72,91.7 76,96.1 80,100.4 84,104.6 88,108.5 92,112.0 96,115.0 100,117.5 104,119.4 108,120.5 112,121.0 116,120.7 120,119.7 124,118.0 128,115.7 132,112.8 136,109.4 140,105.6 144,101.5 148,97.2 152,92.8 156,88.5 160,84.4 164,80.6 168,77.2 172,74.3 176,72.0 180,70.3 184,69.3 188,69.0 192,69.5 196,70.6 200,72.5 204,75.0 208,78.0 212,81.5 216,85.4 220,89.6 224,93.9 228,98.3 232,102.5 236,106.6 240,110.3 244,113.6 248,116.3 252,118.5 256,120.0 260,120.9 264,120.9 268,120.3 272,119.0 276,117.0 280,114.3 284,111.1 288,107.5 292,103.6 296,99.3 300,95.0" stroke="#c4621c" opacity="0.85"/><polyline points="0,95.0 4,97.3 8,99.6 12,101.7 16,103.7 20,105.4 24,106.8 28,107.9 32,108.6 36,109.0 40,108.9 44,108.5 48,107.7 52,106.5 56,105.0 60,103.2 64,101.2 68,99.0 72,96.8 76,94.4 80,92.1 84,89.8 88,87.7 92,85.9 96,84.2 100,82.9 104,81.9 108,81.2 112,81.0 116,81.2 120,81.7 124,82.6 128,83.8 132,85.4 136,87.3 140,89.3 144,91.5 148,93.8 152,96.2 156,98.5 160,100.7 164,102.7 168,104.6 172,106.2 176,107.4 180,108.3 184,108.8 188,109.0 192,108.8 196,108.1 200,107.1 204,105.8 208,104.1 212,102.3 216,100.2 220,97.9 224,95.6 228,93.2 232,91.0 236,88.8 240,86.8 244,85.0 248,83.5 252,82.3 256,81.5 260,81.1 264,81.0 268,81.4 272,82.1 276,83.2 280,84.6 284,86.3 288,88.3 292,90.4 296,92.7 300,95.0" stroke="#0f5566" opacity="0.35"/></g><g fill="#15201d"><rect x="30" y="164" width="6" height="6" opacity="0.25"/><rect x="55" y="164" width="6" height="6" opacity="0.48176274578121053"/><rect x="80" y="164" width="6" height="6" opacity="0.6908389392193548"/><rect x="105" y="164" width="6" height="6" opacity="0.8567627457812106"/><rect x="130" y="164" width="6" height="6" opacity="0.9632923872213651"/><rect x="155" y="164" width="6" height="6" opacity="1.0"/><rect x="180" y="164" width="6" height="6" opacity="0.9632923872213652"/><rect x="205" y="164" width="6" height="6" opacity="0.8567627457812106"/><rect x="230" y="164" width="6" height="6" opacity="0.6908389392193549"/><rect x="255" y="164" width="6" height="6" opacity="0.48176274578121064"/><rect x="280" y="164" width="6" height="6" opacity="0.2500000000000001"/></g><text x="12" y="18" font-family="IBM Plex Mono,monospace" font-size="9" fill="#15201d" letter-spacing="1">INTERFERENCE · |ψ|²</text></svg>
     </div>
     <div class="tag">02 / Quantum Foundations</div>
     <h3><a href="research/quantum-foundations.html">Quantum Measurement</a></h3>
@@ -270,24 +309,7 @@ footer{
 
    <article class="project">
     <div class="project-art">
-     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="#648477" stroke-width="1.5">
-       <path d="M65 120 Q85 55 145 72 Q190 78 218 112"/>
-       <path d="M145 72 Q155 40 183 43 Q208 48 218 78"/>
-       <path d="M100 90L62 45M130 76L115 30M162 74L174 27"/>
-       <path d="M218 112L250 145M218 112L265 105"/>
-       <path d="M65 120L40 145"/>
-       <path d="M75 145Q145 168 235 145"/>
-       <path d="M145 72Q150 120 100 145"/>
-      </g>
-      <g fill="#ad654a">
-       <circle cx="145" cy="72" r="4"/>
-       <circle cx="218" cy="112" r="4"/>
-      </g>
-      <g fill="#202a29" font-family="Arial" font-size="9">
-       <text x="12" y="18">MORPHOLOGY / SCHEMATIC</text>
-      </g>
-     </svg>
+     <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg"><g class="pulse" stroke="#0f5566" stroke-width="2" stroke-linecap="round"><line x1="198.0" y1="95.0" x2="209.9" y2="95.0" opacity="0.64"/><line x1="197.8" y1="99.2" x2="215.0" y2="100.7" opacity="0.73"/><line x1="197.3" y1="103.3" x2="217.3" y2="106.9" opacity="0.78"/><line x1="196.4" y1="107.4" x2="217.3" y2="113.0" opacity="0.80"/><line x1="195.1" y1="111.4" x2="217.3" y2="119.5" opacity="0.83"/><line x1="193.5" y1="115.3" x2="218.4" y2="126.9" opacity="0.90"/><line x1="191.6" y1="119.0" x2="219.1" y2="134.9" opacity="0.96"/><line x1="189.3" y1="122.5" x2="216.5" y2="141.6" opacity="0.99"/><line x1="186.8" y1="125.9" x2="209.9" y2="145.2" opacity="0.94"/><line x1="183.9" y1="128.9" x2="201.2" y2="146.2" opacity="0.84"/><line x1="180.9" y1="131.8" x2="193.1" y2="146.4" opacity="0.76"/><line x1="177.5" y1="134.3" x2="186.3" y2="146.9" opacity="0.70"/><line x1="174.0" y1="136.6" x2="180.0" y2="146.9" opacity="0.64"/><line x1="170.3" y1="138.5" x2="177.4" y2="153.8" opacity="0.72"/><line x1="166.4" y1="140.1" x2="174.2" y2="161.5" opacity="0.82"/><line x1="162.4" y1="141.4" x2="169.4" y2="167.5" opacity="0.89"/><line x1="158.3" y1="142.3" x2="163.2" y2="169.7" opacity="0.90"/><line x1="154.2" y1="142.8" x2="156.5" y2="169.0" opacity="0.87"/><line x1="150.0" y1="143.0" x2="150.0" y2="168.2" opacity="0.86"/><line x1="145.8" y1="142.8" x2="143.5" y2="169.0" opacity="0.87"/><line x1="141.7" y1="142.3" x2="136.8" y2="169.7" opacity="0.90"/><line x1="137.6" y1="141.4" x2="130.6" y2="167.5" opacity="0.89"/><line x1="133.6" y1="140.1" x2="125.8" y2="161.5" opacity="0.82"/><line x1="129.7" y1="138.5" x2="122.6" y2="153.8" opacity="0.72"/><line x1="126.0" y1="136.6" x2="120.1" y2="146.9" opacity="0.64"/><line x1="122.5" y1="134.3" x2="113.7" y2="146.9" opacity="0.70"/><line x1="119.1" y1="131.8" x2="106.9" y2="146.4" opacity="0.76"/><line x1="116.1" y1="128.9" x2="98.8" y2="146.2" opacity="0.84"/><line x1="113.2" y1="125.9" x2="90.1" y2="145.2" opacity="0.94"/><line x1="110.7" y1="122.5" x2="83.5" y2="141.6" opacity="0.99"/><line x1="108.4" y1="119.0" x2="80.9" y2="134.9" opacity="0.96"/><line x1="106.5" y1="115.3" x2="81.6" y2="126.9" opacity="0.90"/><line x1="104.9" y1="111.4" x2="82.7" y2="119.5" opacity="0.83"/><line x1="103.6" y1="107.4" x2="82.7" y2="113.0" opacity="0.80"/><line x1="102.7" y1="103.3" x2="82.7" y2="106.9" opacity="0.78"/><line x1="102.2" y1="99.2" x2="85.0" y2="100.7" opacity="0.73"/><line x1="102.0" y1="95.0" x2="90.1" y2="95.0" opacity="0.64"/><line x1="102.2" y1="90.8" x2="85.0" y2="89.3" opacity="0.73"/><line x1="102.7" y1="86.7" x2="82.7" y2="83.1" opacity="0.78"/><line x1="103.6" y1="82.6" x2="82.7" y2="77.0" opacity="0.80"/><line x1="104.9" y1="78.6" x2="82.7" y2="70.5" opacity="0.83"/><line x1="106.5" y1="74.7" x2="81.6" y2="63.1" opacity="0.90"/><line x1="108.4" y1="71.0" x2="80.9" y2="55.1" opacity="0.96"/><line x1="110.7" y1="67.5" x2="83.5" y2="48.4" opacity="0.99"/><line x1="113.2" y1="64.1" x2="90.1" y2="44.8" opacity="0.94"/><line x1="116.1" y1="61.1" x2="98.8" y2="43.8" opacity="0.84"/><line x1="119.1" y1="58.2" x2="106.9" y2="43.6" opacity="0.76"/><line x1="122.5" y1="55.7" x2="113.7" y2="43.1" opacity="0.70"/><line x1="126.0" y1="53.4" x2="120.0" y2="43.1" opacity="0.64"/><line x1="129.7" y1="51.5" x2="122.6" y2="36.2" opacity="0.72"/><line x1="133.6" y1="49.9" x2="125.8" y2="28.5" opacity="0.82"/><line x1="137.6" y1="48.6" x2="130.6" y2="22.5" opacity="0.89"/><line x1="141.7" y1="47.7" x2="136.8" y2="20.3" opacity="0.90"/><line x1="145.8" y1="47.2" x2="143.5" y2="21.0" opacity="0.87"/><line x1="150.0" y1="47.0" x2="150.0" y2="21.8" opacity="0.86"/><line x1="154.2" y1="47.2" x2="156.5" y2="21.0" opacity="0.87"/><line x1="158.3" y1="47.7" x2="163.2" y2="20.3" opacity="0.90"/><line x1="162.4" y1="48.6" x2="169.4" y2="22.5" opacity="0.89"/><line x1="166.4" y1="49.9" x2="174.2" y2="28.5" opacity="0.82"/><line x1="170.3" y1="51.5" x2="177.4" y2="36.2" opacity="0.72"/><line x1="174.0" y1="53.4" x2="179.9" y2="43.1" opacity="0.64"/><line x1="177.5" y1="55.7" x2="186.3" y2="43.1" opacity="0.70"/><line x1="180.9" y1="58.2" x2="193.1" y2="43.6" opacity="0.76"/><line x1="183.9" y1="61.1" x2="201.2" y2="43.8" opacity="0.84"/><line x1="186.8" y1="64.1" x2="209.9" y2="44.8" opacity="0.94"/><line x1="189.3" y1="67.5" x2="216.5" y2="48.4" opacity="0.99"/><line x1="191.6" y1="71.0" x2="219.1" y2="55.1" opacity="0.96"/><line x1="193.5" y1="74.7" x2="218.4" y2="63.1" opacity="0.90"/><line x1="195.1" y1="78.6" x2="217.3" y2="70.5" opacity="0.83"/><line x1="196.4" y1="82.6" x2="217.3" y2="77.0" opacity="0.80"/><line x1="197.3" y1="86.7" x2="217.3" y2="83.1" opacity="0.78"/><line x1="197.8" y1="90.8" x2="215.0" y2="89.3" opacity="0.73"/></g><circle cx="150" cy="95" r="38" fill="none" stroke="#c4621c" stroke-width="1" stroke-dasharray="2 3"/><circle cx="150" cy="95" r="4" fill="#c4621c"/><text x="12" y="18" font-family="IBM Plex Mono,monospace" font-size="9" fill="#15201d" letter-spacing="1">PALEOSOUND · SIGNAL</text></svg>
     </div>
     <div class="tag">03 / Computational Paleobiology</div>
     <h3><a href="research/paleosound.html">PaleoSound</a></h3>
@@ -365,10 +387,11 @@ footer{
 </main>
 
 <footer class="wrap">
- <span>DR / 03 — Independent Research Atlas</span>
+ <span>Science for Everyone · DR / 03</span>
  <span>Vladislav Druzhka · 2026</span>
 </footer>
 
+<script>(function(){if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){document.querySelectorAll(".hero-art animate").forEach(function(a){a.remove()})}})();</script>
 </body>
         </html>
         
