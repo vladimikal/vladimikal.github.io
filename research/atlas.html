@@ -6,7 +6,7 @@
 <meta name="description" content="Research atlas: where the origin-of-life protein and protocell work stands, what is being tested and what is planned.">
 <title>Research Atlas — Origin of Life · DR / 03</title>
 <style>
-:root{--paper:#eeeade;--paper2:#e4dfd1;--ink:#202a29;--muted:#69716a;--green:#648477;--rust:#ad654a;--line:#c9c4b5;--white:#f8f6ef}
+:root{--paper:#dbe8e2;--paper2:#c9dcd3;--ink:#15201d;--muted:#69716a;--green:#0f5566;--rust:#c4621c;--line:#a3bab0;--white:#f8f6ef}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
 a{color:var(--green)}
@@ -42,7 +42,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 .s-done .ring::after{background:var(--paper);inset:12px}
 .s-alt .ring{opacity:.6}
 .ring.in{opacity:1;transform:scale(1)}
-.ring:hover,.ring:focus-visible{box-shadow:0 0 0 5px rgba(100,132,119,.25);outline:none}
+.ring:hover,.ring:focus-visible{box-shadow:0 0 0 5px rgba(15,85,102,.25);outline:none}
 .s-active .ring::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--c);opacity:0;animation:ping 2.2s ease-out infinite}
 @keyframes ping{0%{transform:scale(.7);opacity:.7}100%{transform:scale(1.3);opacity:0}}
 .vline{position:absolute;left:50%;width:1px;background:var(--c);margin-left:-.5px;transform:scaleY(0);transition:transform .6s ease .25s;opacity:.8}
@@ -55,7 +55,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 .item.up .card{--dy:-14px}
 .item.down .card{--dy:14px}
 .card.in{opacity:1;transform:none}
-.card:hover,.card:focus-visible{box-shadow:0 8px 22px rgba(32,42,41,.1);outline:none}
+.card:hover,.card:focus-visible{box-shadow:0 8px 22px rgba(21,32,29,.1);outline:none}
 .card .title{display:block;font-size:15px;line-height:1.35}
 .card .st{display:inline-block;margin-top:6px;font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
 .s-done{--c:var(--green)}
@@ -67,7 +67,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 .s-plan .ring::after{background:var(--paper);border:2px solid var(--ink);inset:6px}
 .s-later .ring::after{background:var(--paper);border:2px dashed var(--muted);inset:6px}
 .hidden{display:none!important}
-.detail{position:fixed;right:20px;bottom:20px;width:min(380px,calc(100% - 40px));background:var(--white);border:1px solid var(--line);padding:20px;box-shadow:0 14px 40px rgba(32,42,41,.14);transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:10}
+.detail{position:fixed;right:20px;bottom:20px;width:min(380px,calc(100% - 40px));background:var(--white);border:1px solid var(--line);padding:20px;box-shadow:0 14px 40px rgba(21,32,29,.14);transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:10}
 .detail.open{opacity:1;transform:none;pointer-events:auto}
 .detail h3{font-weight:normal;font-size:22px;margin:4px 0 8px}
 .detail p{font-size:15px;margin:0 0 12px}
@@ -77,7 +77,7 @@ h1{font-weight:normal;font-size:clamp(38px,6vw,64px);letter-spacing:-1.5px;margi
 .scroll-wrap{position:relative;margin-top:40px}
 .scroll-bar{height:2px;background:var(--line);margin:0 12px 0;position:relative}
 .scroll-bar i{position:absolute;left:0;top:0;height:2px;width:30%;background:var(--ink);transition:left .15s linear}
-.scroll-wrap::after{content:"";position:absolute;right:0;top:0;bottom:24px;width:70px;pointer-events:none;background:linear-gradient(to right,rgba(238,234,222,0),var(--paper));transition:opacity .3s}
+.scroll-wrap::after{content:"";position:absolute;right:0;top:0;bottom:24px;width:70px;pointer-events:none;background:linear-gradient(to right,rgba(219,232,226,0),var(--paper));transition:opacity .3s}
 .scroll-wrap.at-end::after{opacity:0}
 @media (max-width:700px){.scroll-wrap::after,.scroll-bar{display:none}}
 @media (max-width:700px){
