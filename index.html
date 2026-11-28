@@ -178,6 +178,9 @@ header .logo small{color:#f4eddc;border-color:#f4eddc}
   .links{gap:14px;font-size:10px}
   h1{letter-spacing:-.025em}
 }
+.hero-art .node circle{transition:r .25s ease;cursor:pointer}
+.hero-art .node:hover circle,.hero-art .node:focus circle{r:9}
+.hero-art .node:focus{outline:none}
 </style>
 </head>
 
@@ -221,19 +224,31 @@ header .logo small{color:#f4eddc;border-color:#f4eddc}
  </div>
 
  <div class="hero-art">
-  <svg viewBox="0 0 480 430" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 480 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three research directions connected on a rotating sphere">
    <rect width="480" height="430" fill="#d3e4dc"/>
    <g fill="none" stroke="#0f5566" stroke-width="1.2">
     <circle cx="240" cy="205" r="145"/>
     <circle cx="240" cy="205" r="110" stroke-dasharray="3 7"/>
     <ellipse cx="240" cy="205" rx="145" ry="55"/>
-    <ellipse cx="240" cy="205" rx="55" ry="145"/>
-    <path d="M95 205H385M240 60V350"/>
+    <ellipse cx="240" cy="205" rx="55" ry="145">
+     <animate attributeName="rx" values="145;0;145" dur="18s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </ellipse>
+    <ellipse cx="240" cy="205" rx="110" ry="145">
+     <animate attributeName="rx" values="110;-110;110" dur="18s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </ellipse>
+    <path d="M95 205H385"/>
    </g>
-   <g fill="none" stroke="#c4621c" stroke-width="2">
-    <path d="M110 280 Q175 80 240 205 T370 125"/>
+   <path d="M110 280 Q175 80 240 205 T370 125" fill="none" stroke="#c4621c" stroke-width="2"/>
+   <g class="node" tabindex="0">
+    <title>Protocell Dynamics: computational model</title>
     <circle cx="110" cy="280" r="5" fill="#c4621c"/>
+   </g>
+   <g class="node" tabindex="0">
+    <title>Quantum Measurement: conceptual research</title>
     <circle cx="240" cy="205" r="6" fill="#c4621c"/>
+   </g>
+   <g class="node" tabindex="0">
+    <title>PaleoSound: acoustic reconstruction</title>
     <circle cx="370" cy="125" r="5" fill="#c4621c"/>
    </g>
    <g fill="#15201d" font-family="Arial" font-size="10">
@@ -376,6 +391,7 @@ header .logo small{color:#f4eddc;border-color:#f4eddc}
  <span>Vladislav Druzhka · 2026</span>
 </footer>
 
+<script>(function(){if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){document.querySelectorAll(".hero-art animate").forEach(function(a){a.remove()})}})();</script>
 </body>
         </html>
         
